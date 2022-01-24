@@ -11,6 +11,7 @@ export default function PageRoutes(): JSX.Element {
     name: "",
     team_id: 0,
   });
+  const [team, setTeam] = useState<number>(0);
 
   return (
     <Router>
@@ -19,7 +20,8 @@ export default function PageRoutes(): JSX.Element {
           path="/"
           element={
             <Home
-              team_id={1}
+              team={team}
+              setTeam={setTeam}
               currentUser={currentUser}
               setCurrentUser={setCurrentUser}
             />
@@ -30,7 +32,8 @@ export default function PageRoutes(): JSX.Element {
           path="/dashboard"
           element={
             <Dashboard
-              team_id={1}
+              team={team}
+              setTeam={setTeam}
               currentUser={currentUser}
               setCurrentUser={setCurrentUser}
             />

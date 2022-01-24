@@ -1,14 +1,10 @@
 import { useEffect, useState } from "react";
 import fetchUsers from "../utils/fetch/fetchUsers";
 import { UserInterface } from "../utils/interfaces/UserInterface";
+import PageProps from "../utils/interfaces/PageProps";
+import { Link } from "react-router-dom";
 
-interface HomeProps {
-  team_id: number;
-  currentUser: UserInterface;
-  setCurrentUser: React.Dispatch<React.SetStateAction<UserInterface>>;
-}
-
-export default function Home(props: HomeProps): JSX.Element {
+export default function Home(props: PageProps): JSX.Element {
   const [allUsers, setAllUsers] = useState<UserInterface[]>([]);
 
   useEffect(() => {
@@ -19,7 +15,8 @@ export default function Home(props: HomeProps): JSX.Element {
 
   useEffect(() => {
     console.log(props.currentUser);
-  }, [props.currentUser]);
+    console.log(props.team);
+  }, [props.currentUser, props.team]);
 
   const usersList = allUsers.map((user) => {
     return (
@@ -35,6 +32,12 @@ export default function Home(props: HomeProps): JSX.Element {
     return user[0];
   }
 
+  function logIn(id: number) {
+    const user = getUserByID(id);
+    props.setCurrentUser(user);
+    props.setTeam(user.team_id);
+  }
+
   return (
     <div>
       <h1>StandUp</h1>
@@ -44,7 +47,7 @@ export default function Home(props: HomeProps): JSX.Element {
         id="inner"
         value={props.currentUser.id}
         onChange={(e) => {
-          props.setCurrentUser(getUserByID(parseInt(e.target.value)));
+          logIn(parseInt(e.target.value));
         }}
       >
         <option value={0} disabled>
@@ -52,6 +55,9 @@ export default function Home(props: HomeProps): JSX.Element {
         </option>
         {usersList}
       </select>
+      <Link to="/dashboard">
+        <button>Log In</button>
+      </Link>
     </div>
   );
 }

@@ -1,11 +1,17 @@
-import { UserInterface } from "../utils/interfaces/UserInterface";
+// import { UserInterface } from "../utils/interfaces/UserInterface";
+import NavBar from "../components/NavBar";
+import PageProps from "../utils/interfaces/PageProps";
 
-interface DashboardProps {
-  team_id: number;
-  currentUser: UserInterface;
-  setCurrentUser: React.Dispatch<React.SetStateAction<UserInterface>>;
-}
-
-export default function Dashboard(props: DashboardProps): JSX.Element {
-  return <h1>Dashboard for team {props.team_id}</h1>;
+export default function Dashboard(props: PageProps): JSX.Element {
+  return (
+    <div className="dashboard">
+      <NavBar
+        team={props.team}
+        setTeam={props.setTeam}
+        currentUser={props.currentUser}
+        setCurrentUser={props.setCurrentUser}
+      />
+      <h1>Team {props.team}</h1>
+    </div>
+  );
 }
