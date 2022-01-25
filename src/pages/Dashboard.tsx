@@ -15,10 +15,6 @@ export default function Dashboard(props: PageProps): JSX.Element {
     useState<StandupInterface[]>();
 
   useEffect(() => {
-    console.log(previousStandups);
-  }, [previousStandups]);
-
-  useEffect(() => {
     fetchTeamName(props.team).then((res) => {
       setTeamName(res ? res : "");
     });

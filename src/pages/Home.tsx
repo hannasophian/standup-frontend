@@ -13,8 +13,6 @@ export default function Home(props: PageProps): JSX.Element {
     });
   }, []);
 
-
-
   const usersList = allUsers.map((user) => {
     return (
       <option value={user.id} key={user.id}>
