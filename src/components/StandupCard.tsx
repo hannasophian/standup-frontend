@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import fetchActivities from "../utils/fetch/fetchActivities";
+import toStringDate from "../utils/helpers/toStringDate";
 import ActivitiesInterface from "../utils/interfaces/ActivitiesInterface";
 import StandupInterface from "../utils/interfaces/StandupInterface";
 import ActivitiesDisplay from "./ActivitiesDisplay";
@@ -19,7 +20,7 @@ export default function StandupCard(props: {
 
   return (
     <div className="standupcard">
-      <h3>{props.standup.time}</h3>
+      <h3>{toStringDate(props.standup.time)}</h3>
       {props.currentUserID === props.standup.chair_id && <button>Edit</button>}
       <p>Chaired by: {props.standup.chair_name}</p>
       {props.standup.meeting_link && (
