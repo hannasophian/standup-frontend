@@ -9,12 +9,16 @@ import PageProps from "../utils/interfaces/PageProps";
 import StandupInterface from "../utils/interfaces/StandupInterface";
 import "../css/app.css";
 import "../css/standupcard.css";
+import { UserInterface } from "../utils/interfaces/UserInterface";
+import fetchTeamMembers from "../utils/fetch/fetchTeamMembers";
 
 export default function Dashboard(props: PageProps): JSX.Element {
   const [teamName, setTeamName] = useState<string>("");
   const [nextStandup, setNextStandup] = useState<StandupInterface>();
   const [previousStandups, setPreviousStandups] =
     useState<StandupInterface[]>();
+  const [teamMembers, setTeamMembers] = useState<UserInterface[]>([]);
+  const [seeMembers, setSeeMembers] = useState<boolean>(false);
 
   useEffect(() => {
     fetchTeamName(props.team).then((res) => {
@@ -30,6 +34,12 @@ export default function Dashboard(props: PageProps): JSX.Element {
     fetchPreviousStandups(props.team).then((res) => {
       if (res) {
         setPreviousStandups(res);
+      }
+    });
+
+    fetchTeamMembers(props.team).then((res) => {
+      if (res) {
+        setTeamMembers(res);
       }
     });
     // eslint-disable-next-line
@@ -51,6 +61,8 @@ export default function Dashboard(props: PageProps): JSX.Element {
     <p>No previous Standups</p>
   );
 
+  const memberList = teamMembers.map((user) => user.name).join(", ");
+
   return (
     <div className="dashboard">
       <div className="container">
@@ -62,8 +74,17 @@ export default function Dashboard(props: PageProps): JSX.Element {
             setCurrentUser={props.setCurrentUser}
           />
         </div>
-        <div className="row">
+        <div className="dashboard-header">
           <h1>{teamName}</h1>
+          <button onClick={() => setSeeMembers(!seeMembers)}>
+            See all members
+          </button>
+
+          {seeMembers && (
+            <div className="member-list">
+              <p>{memberList}</p>
+            </div>
+          )}
         </div>
         <div className="dashboard-body">
           <div className="standup-display">
