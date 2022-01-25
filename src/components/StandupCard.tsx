@@ -3,18 +3,13 @@ import fetchActivities from "../utils/fetch/fetchActivities";
 import ActivitiesInterface from "../utils/interfaces/ActivitiesInterface";
 import StandupInterface from "../utils/interfaces/StandupInterface";
 import ActivitiesDisplay from "./ActivitiesDisplay";
+import NotesDisplay from "./NotesDisplay";
 
 export default function StandupCard(props: {
   standup: StandupInterface;
   currentUserID: number;
 }): JSX.Element {
   const [activities, setActivities] = useState<ActivitiesInterface[]>();
-
-  useEffect(() => {
-    if (activities && activities.length !== 0) {
-      console.log(activities);
-    }
-  }, [activities]);
 
   useEffect(() => {
     fetchActivities(props.standup.id).then((res) => {
@@ -44,9 +39,11 @@ export default function StandupCard(props: {
         />
       )}
 
-      {props.currentUserID === props.standup.chair_id && (
-        <button>Edit Notes</button>
-      )}
+      <NotesDisplay
+        currentUserID={props.currentUserID}
+        chairID={props.standup.chair_id}
+        standup={props.standup}
+      />
     </div>
   );
 }
