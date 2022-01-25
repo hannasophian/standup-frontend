@@ -1,3 +1,17 @@
-export default function Dashboard(props: { team_id: number }): JSX.Element {
-  return <h1>Dashboard for team {props.team_id}</h1>;
+// import { UserInterface } from "../utils/interfaces/UserInterface";
+import NavBar from "../components/NavBar";
+import PageProps from "../utils/interfaces/PageProps";
+
+export default function Dashboard(props: PageProps): JSX.Element {
+  return (
+    <div className="dashboard">
+      <NavBar
+        team={props.team}
+        setTeam={props.setTeam}
+        currentUser={props.currentUser}
+        setCurrentUser={props.setCurrentUser}
+      />
+      <h1>Team {props.team}</h1>
+    </div>
+  );
 }
