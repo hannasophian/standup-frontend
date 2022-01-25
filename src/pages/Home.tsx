@@ -13,11 +13,6 @@ export default function Home(props: PageProps): JSX.Element {
     });
   }, []);
 
-  useEffect(() => {
-    console.log(props.currentUser);
-    console.log(props.team);
-  }, [props.currentUser, props.team]);
-
   const usersList = allUsers.map((user) => {
     return (
       <option value={user.id} key={user.id}>
