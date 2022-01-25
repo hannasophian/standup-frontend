@@ -40,6 +40,8 @@ export default function Dashboard(props: PageProps): JSX.Element {
       return (
         <StandupCard
           key={standup.id}
+          setNextStandup={setNextStandup}
+          setPreviousStandups={setPreviousStandups}
           standup={standup}
           currentUserID={props.currentUser.id}
         />
@@ -68,6 +70,8 @@ export default function Dashboard(props: PageProps): JSX.Element {
             <h2>Next StandUp</h2>
             {nextStandup && (
               <StandupCard
+                setNextStandup={setNextStandup}
+                setPreviousStandups={setPreviousStandups}
                 standup={nextStandup}
                 currentUserID={props.currentUser.id}
               />

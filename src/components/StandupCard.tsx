@@ -9,6 +9,12 @@ import NotesDisplay from "./NotesDisplay";
 export default function StandupCard(props: {
   standup: StandupInterface;
   currentUserID: number;
+  setNextStandup: React.Dispatch<
+    React.SetStateAction<StandupInterface | undefined>
+  >;
+  setPreviousStandups: React.Dispatch<
+    React.SetStateAction<StandupInterface[] | undefined>
+  >;
 }): JSX.Element {
   const [activities, setActivities] = useState<ActivitiesInterface[]>();
 
@@ -48,6 +54,8 @@ export default function StandupCard(props: {
       )}
 
       <NotesDisplay
+        setNextStandup={props.setNextStandup}
+        setPreviousStandups={props.setPreviousStandups}
         currentUserID={props.currentUserID}
         chairID={props.standup.chair_id}
         standup={props.standup}

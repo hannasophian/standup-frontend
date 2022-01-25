@@ -2,22 +2,35 @@ import { useEffect, useState } from "react";
 import Modal from "react-modal";
 import toStringDate from "../utils/helpers/toStringDate";
 import StandupInterface from "../utils/interfaces/StandupInterface";
-import "../css/standupcard.css"
+import "../css/standupcard.css";
+import updateNotes from "../utils/fetch/updateNotes";
+import fetchNextStandup from "../utils/fetch/fetchNextStandup";
+import fetchPreviousStandups from "../utils/fetch/fetchPreviousStandups";
 
 interface NotesDisplayProps {
   currentUserID: number;
   chairID: number;
   standup: StandupInterface;
+
+  setNextStandup: React.Dispatch<
+    React.SetStateAction<StandupInterface | undefined>
+  >;
+  setPreviousStandups: React.Dispatch<
+    React.SetStateAction<StandupInterface[] | undefined>
+  >;
 }
 
 export default function NotesDisplay(props: NotesDisplayProps): JSX.Element {
   const [notesInput, setNotesInput] = useState<string>();
-  const [seenotesModalIsOpen, setseeNotesModalIsOpen] = useState<boolean>(false);
+  const [seenotesModalIsOpen, setseeNotesModalIsOpen] =
+    useState<boolean>(false);
   const [addModalIsOpen, setAddModalIsOpen] = useState<boolean>(false);
 
   // if there are notes, have show notes button
   const notesButton = () => {
-    return <button onClick={() => setseeNotesModalIsOpen(true)}>Show Notes</button>;
+    return (
+      <button onClick={() => setseeNotesModalIsOpen(true)}>Show Notes</button>
+    );
   };
   // If no notes and user = chair, have 'add notes' button
   const addNoteButton = () => {
@@ -25,8 +38,27 @@ export default function NotesDisplay(props: NotesDisplayProps): JSX.Element {
   };
 
   useEffect(() => {
-    console.log(props.standup);
-  }, [props.standup]);
+    if (props.standup.notes !== null) {
+      setNotesInput(props.standup.notes);
+    }
+    // eslint-disable-next-line
+  }, []);
+
+  async function handleSubmit() {
+    setAddModalIsOpen(false);
+    console.log(notesInput);
+    updateNotes(props.standup.id, notesInput ? notesInput : "");
+    fetchNextStandup(props.standup.team_id).then((res) => {
+      if (res) {
+        props.setNextStandup(res);
+      }
+    });
+    fetchPreviousStandups(props.standup.team_id).then((res) => {
+      if (res) {
+        props.setPreviousStandups(res);
+      }
+    });
+  }
 
   const seeNotesModal = () => {
     return (
@@ -52,13 +84,20 @@ export default function NotesDisplay(props: NotesDisplayProps): JSX.Element {
           </button>
         </div>
         <div className="modal-body">
-          {props.chairID===props.currentUserID && <button
-            type="button"
-            className="edit"
-            onClick={() => {setseeNotesModalIsOpen(false); setAddModalIsOpen(true)}}
-          > Edit
-            <span aria-hidden="true">&times;</span>
-          </button>}
+          {props.chairID === props.currentUserID && (
+            <button
+              type="button"
+              className="edit"
+              onClick={() => {
+                setseeNotesModalIsOpen(false);
+                setAddModalIsOpen(true);
+              }}
+            >
+              {" "}
+              Edit
+              <span aria-hidden="true">&times;</span>
+            </button>
+          )}
           <p>{props.standup.notes}</p>
         </div>
       </Modal>
@@ -92,10 +131,12 @@ export default function NotesDisplay(props: NotesDisplayProps): JSX.Element {
           <textarea
             id="notes-input"
             rows={7}
-            placeholder="Add notes to this standup. What did you do? Are there any common problems? Were any questions raised? "
-            onChange={(e) => setNotesInput(e.target.value)}>{props.standup.notes !== null && props.standup.notes}</textarea>
+            placeholder="Add notes to this standup. What did you do? Are there any common problems? Were any questions? "
+            onChange={(e) => setNotesInput(e.target.value)}
+            value={notesInput}
+          ></textarea>
           <br />
-          <button onClick={() => {setAddModalIsOpen(false);console.log(notesInput)}}>OK</button>
+          <button onClick={handleSubmit}>OK</button>
         </div>
       </Modal>
     );
