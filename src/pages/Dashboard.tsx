@@ -7,6 +7,8 @@ import fetchPreviousStandups from "../utils/fetch/fetchPreviousStandups";
 import fetchTeamName from "../utils/fetch/fetchTeamName";
 import PageProps from "../utils/interfaces/PageProps";
 import StandupInterface from "../utils/interfaces/StandupInterface";
+import "../css/app.css";
+import "../css/standupcard.css";
 
 export default function Dashboard(props: PageProps): JSX.Element {
   const [teamName, setTeamName] = useState<string>("");
@@ -49,25 +51,34 @@ export default function Dashboard(props: PageProps): JSX.Element {
 
   return (
     <div className="dashboard">
-      <NavBar
-        team={props.team}
-        setTeam={props.setTeam}
-        currentUser={props.currentUser}
-        setCurrentUser={props.setCurrentUser}
-      />
-      <h1>{teamName}</h1>
-
-      <br />
-      <h2>Next StandUp</h2>
-      {nextStandup && (
-        <StandupCard
-          standup={nextStandup}
-          currentUserID={props.currentUser.id}
-        />
-      )}
-      <br />
-      <h2>Previous StandUps</h2>
-      {previousStandups && previousCards}
+      <div className="container">
+        <div className="row">
+          <NavBar
+            team={props.team}
+            setTeam={props.setTeam}
+            currentUser={props.currentUser}
+            setCurrentUser={props.setCurrentUser}
+          />
+        </div>
+        <div className="row">
+          <h1>{teamName}</h1>
+        </div>
+        <div className="dashboard-body">
+          <div className="standup-display">
+            <h2>Next StandUp</h2>
+            {nextStandup && (
+              <StandupCard
+                standup={nextStandup}
+                currentUserID={props.currentUser.id}
+              />
+            )}
+            <br />
+            <h2>Previous StandUps</h2>
+            {previousStandups && previousCards}
+          </div>
+          <div className="right-col">This is the side stuff</div>
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,0 +1,41 @@
+@import url("https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300&display=swap");
+
+.standupcard {
+  background-color: #feece9;
+  padding: 20px;
+  margin: 10px;
+}
+
+.notesdisplay > button {
+  width: 100%;
+}
+
+.activity-header {
+  display: flex;
+}
+
+.card-header {
+  display: flex;
+}
+
+body {
+  font-family: "Merriweather Sans", sans-serif;
+}
+
+h3 {
+  font-family: "Merriweather Sans", sans-serif;
+  font-size: 20px;
+}
+
+.edit-button {
+  /* height: 50px; */
+  margin: 0 20px;
+  justify-content: right;
+
+  /* flex: 1; */
+  /* align-content: right; */
+}
+
+.activity {
+  display: flex;
+}
