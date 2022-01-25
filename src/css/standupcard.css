@@ -39,3 +39,7 @@ h3 {
 .activity {
   display: flex;
 }
+
+#notes-input {
+  width: 100%;
+}
