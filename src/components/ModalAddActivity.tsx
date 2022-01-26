@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Modal from "react-modal";
+import postActivity from "../utils/fetch/postActivity";
 import toStringDate from "../utils/helpers/toStringDate";
 import InputActivityInterface from "../utils/interfaces/InputActivityInterface";
 import StandupInterface from "../utils/interfaces/StandupInterface";
@@ -26,6 +27,7 @@ export default function ModalAddActivity(props: AddActivityProps): JSX.Element {
       window.alert("Cannot submit activity with no title");
     } else {
       console.log(inputActivity);
+      postActivity(inputActivity);
       props.setAddActivityIsOpen(false);
       setInputActivity(initialInputActivity);
     }
