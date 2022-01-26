@@ -1,15 +1,21 @@
 import ActivitiesInterface from "../utils/interfaces/ActivitiesInterface";
 import "../css/standupcard.css";
+import { useState } from "react";
+import ModalAddActivity from "./ModalAddActivity";
+import StandupInterface from "../utils/interfaces/StandupInterface";
 
 interface ActivitiesDisplayProps {
   currentUserID: number;
   chairID: number;
   activities: ActivitiesInterface[];
+  standup: StandupInterface;
 }
 
 export default function ActivitiesDisplay(
   props: ActivitiesDisplayProps
 ): JSX.Element {
+  const [addActivityIsOpen, setAddActivityIsOpen] = useState<boolean>(false);
+
   const activitylist = props.activities.map((activity) => (
     <>
       <div key={activity.id} className="row">
@@ -37,6 +43,7 @@ export default function ActivitiesDisplay(
       </div>
     </>
   ));
+
   return (
     <>
       <div className="activity-header">
@@ -48,7 +55,14 @@ export default function ActivitiesDisplay(
         {props.activities.length !== 0 && activitylist}
       </div>
 
-      {props.currentUserID === props.chairID && <button>Add activity</button>}
+      {props.currentUserID === props.chairID && (
+        <button onClick={() => setAddActivityIsOpen(true)}>Add activity</button>
+      )}
+      <ModalAddActivity
+        standup={props.standup}
+        addActivityIsOpen={addActivityIsOpen}
+        setAddActivityIsOpen={setAddActivityIsOpen}
+      />
     </>
   );
 }

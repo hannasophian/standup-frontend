@@ -50,6 +50,7 @@ export default function StandupCard(props: {
           currentUserID={props.currentUserID}
           chairID={props.standup.chair_id}
           activities={activities}
+          standup={props.standup}
         />
       )}
 
