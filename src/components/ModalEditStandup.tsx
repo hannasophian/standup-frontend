@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Modal from "react-modal";
+import updateStandup from "../utils/fetch/updateStandup";
 // import updateActivity from "../utils/fetch/updateActivity";
 import toStringDate from "../utils/helpers/toStringDate";
 // import ActivitiesInterface from "../utils/interfaces/ActivitiesInterface";
@@ -16,8 +17,10 @@ interface EditStandupProps {
 
 export default function ModalEditStandup(props: EditStandupProps): JSX.Element {
   const [inputDetails, setInputDetails] = useState<InputStandUpInterface>({
+    id: props.standup.id,
     time: props.standup.time,
     chair_id: props.standup.chair_id,
+    meeting_link: props.standup.meeting_link ? props.standup.meeting_link : "",
   });
 
   const usersList = props.teamMembers.map((user) => {
@@ -28,15 +31,15 @@ export default function ModalEditStandup(props: EditStandupProps): JSX.Element {
     );
   });
 
-  //   function handleSubmit() {
-  //     if (inputActivity.name === null || inputActivity.name === "") {
-  //       window.alert("Cannot submit activity with no title");
-  //     } else {
-  //       console.log(inputActivity);
-  //       updateActivity(inputActivity);
-  //       props.setEditActivityIsOpen(false);
-  //     }
-  //   }
+  function handleSubmit() {
+    if (inputDetails.time === null || inputDetails.chair_id === null) {
+      window.alert("Cannot submit standup with no time or chair");
+    } else {
+      console.log(inputDetails);
+      updateStandup({ ...inputDetails, time: inputDetails.time + "Z" });
+      props.setEditStandupIsOpen(false);
+    }
+  }
   return (
     <Modal
       id="edit-notes-modal"
@@ -70,11 +73,19 @@ export default function ModalEditStandup(props: EditStandupProps): JSX.Element {
             type="datetime-local"
             id="standuptime"
             name=""
-            onChange={(e) => console.log(typeof e.target.value)}
-            placeholder={inputDetails.time}
+            onChange={(e) => {
+              setInputDetails({ ...inputDetails, time: e.target.value });
+              console.log(e.target.value);
+            }}
+            value={
+              inputDetails.time.includes("Z")
+                ? inputDetails.time.slice(0, inputDetails.time.length - 1)
+                : inputDetails.time
+            }
+            // placeholder={inputDetails.time}
           />
           <br />
-          <label htmlFor="chair-select">Select chair</label>
+          <label htmlFor="chair-select">Chair</label>
           <select
             className="user-dropdown"
             name="chair-select"
@@ -89,8 +100,18 @@ export default function ModalEditStandup(props: EditStandupProps): JSX.Element {
           >
             {usersList}
           </select>
+          <br />
+
+          <label htmlFor="meeting-link-input">Meeting Link (Optional)</label>
+          <input
+            id="meeting-link-input"
+            value={inputDetails.meeting_link}
+            onChange={(e) =>
+              setInputDetails({ ...inputDetails, meeting_link: e.target.value })
+            }
+          ></input>
         </section>
-        <button>OK</button>
+        <button onClick={handleSubmit}>OK</button>
       </div>
     </Modal>
   );
