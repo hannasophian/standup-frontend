@@ -3,12 +3,15 @@ import fetchActivities from "../utils/fetch/fetchActivities";
 import toStringDate from "../utils/helpers/toStringDate";
 import ActivitiesInterface from "../utils/interfaces/ActivitiesInterface";
 import StandupInterface from "../utils/interfaces/StandupInterface";
+import { UserInterface } from "../utils/interfaces/UserInterface";
 import ActivitiesDisplay from "./ActivitiesDisplay";
+import ModalEditStandup from "./ModalEditStandup";
 import NotesDisplay from "./NotesDisplay";
 
 export default function StandupCard(props: {
   standup: StandupInterface;
   currentUserID: number;
+  teamMembers: UserInterface[];
   setNextStandup: React.Dispatch<
     React.SetStateAction<StandupInterface | undefined>
   >;
@@ -17,6 +20,7 @@ export default function StandupCard(props: {
   >;
 }): JSX.Element {
   const [activities, setActivities] = useState<ActivitiesInterface[]>();
+  const [editStandupIsOpen, setEditStandupIsOpen] = useState<boolean>(false);
 
   useEffect(() => {
     fetchActivities(props.standup.id).then((res) => {
@@ -31,7 +35,12 @@ export default function StandupCard(props: {
           <h3>{toStringDate(props.standup.time)}</h3>
         </div>
         {props.currentUserID === props.standup.chair_id && (
-          <button className="edit-button">Edit</button>
+          <button
+            className="edit-button"
+            onClick={() => setEditStandupIsOpen(true)}
+          >
+            Edit
+          </button>
         )}
       </div>
 
@@ -60,6 +69,13 @@ export default function StandupCard(props: {
         currentUserID={props.currentUserID}
         chairID={props.standup.chair_id}
         standup={props.standup}
+      />
+
+      <ModalEditStandup
+        editStandupIsOpen={editStandupIsOpen}
+        setEditStandupIsOpen={setEditStandupIsOpen}
+        standup={props.standup}
+        teamMembers={props.teamMembers}
       />
     </div>
   );

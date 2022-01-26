@@ -54,6 +54,7 @@ export default function Dashboard(props: PageProps): JSX.Element {
           setPreviousStandups={setPreviousStandups}
           standup={standup}
           currentUserID={props.currentUser.id}
+          teamMembers={teamMembers}
         />
       );
     })
@@ -95,6 +96,7 @@ export default function Dashboard(props: PageProps): JSX.Element {
                 setPreviousStandups={setPreviousStandups}
                 standup={nextStandup}
                 currentUserID={props.currentUser.id}
+                teamMembers={teamMembers}
               />
             )}
             <br />
