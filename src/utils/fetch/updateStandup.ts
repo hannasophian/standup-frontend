@@ -9,7 +9,10 @@ export default async function updateStandup(
       `https://standup-proj.herokuapp.com/standups/${inputDetails.id}`,
       {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
         body: JSON.stringify({
           time: inputDetails.time,
           chair_id: inputDetails.chair_id,

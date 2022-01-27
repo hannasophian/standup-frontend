@@ -8,7 +8,10 @@ export default async function updateNotes(
       `https://standup-proj.herokuapp.com/standups/notes/${standup_id}`,
       {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
         body: JSON.stringify({ notes: notes }),
       }
     );

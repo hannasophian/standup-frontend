@@ -8,7 +8,10 @@ export default async function updateActivity(
       `https://standup-proj.herokuapp.com/activity/${inputActivity.id}`,
       {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
         body: JSON.stringify({
           name: inputActivity.name,
           url: inputActivity.url,
