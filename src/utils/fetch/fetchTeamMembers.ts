@@ -5,7 +5,10 @@ export default async function fetchTeamMembers(
 ): Promise<UserInterface[] | void> {
   try {
     const APIres = await fetch(
-      `https://standup-proj.herokuapp.com/teams/members/${team_id}`
+      `https://standup-proj.herokuapp.com/teams/members/${team_id}`,
+      {
+        headers: { "Access-Control-Allow-Origin": "*" },
+      }
     );
     const users = await APIres.json();
     return users.data;

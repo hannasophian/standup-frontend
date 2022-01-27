@@ -5,7 +5,10 @@ export default async function fetchActivities(
 ): Promise<ActivitiesInterface[] | void> {
   try {
     const APIres = await fetch(
-      `https://standup-proj.herokuapp.com/standups/activities/${standupID}`
+      `https://standup-proj.herokuapp.com/standups/activities/${standupID}`,
+      {
+        headers: { "Access-Control-Allow-Origin": "*" },
+      }
     );
     const data = await APIres.json();
     return data.data;

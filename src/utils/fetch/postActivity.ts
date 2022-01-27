@@ -8,7 +8,10 @@ export default async function postActivity(
       `https://standup-proj.herokuapp.com/activity/${inputActivity.standup_id}`,
       {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
         body: JSON.stringify({
           user_id: inputActivity.user_id,
           name: inputActivity.name,
