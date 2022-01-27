@@ -47,7 +47,7 @@ export default function NotesDisplay(props: NotesDisplayProps): JSX.Element {
   async function handleSubmit() {
     setAddModalIsOpen(false);
     console.log(notesInput);
-    updateNotes(props.standup.id, notesInput ? notesInput : "");
+    await updateNotes(props.standup.id, notesInput ? notesInput : "");
     fetchNextStandup(props.standup.team_id).then((res) => {
       if (res) {
         props.setNextStandup(res);
