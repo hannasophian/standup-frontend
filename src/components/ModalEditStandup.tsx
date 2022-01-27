@@ -36,7 +36,13 @@ export default function ModalEditStandup(props: EditStandupProps): JSX.Element {
       window.alert("Cannot submit standup with no time or chair");
     } else {
       console.log(inputDetails);
-      updateStandup({ ...inputDetails, time: inputDetails.time + "Z" });
+      updateStandup({
+        ...inputDetails,
+        time:
+          inputDetails.time[inputDetails.time.length - 1] === "Z"
+            ? inputDetails.time
+            : inputDetails.time + "Z",
+      });
       props.setEditStandupIsOpen(false);
     }
   }
