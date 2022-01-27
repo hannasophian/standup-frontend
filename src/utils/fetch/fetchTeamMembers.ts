@@ -7,7 +7,7 @@ export default async function fetchTeamMembers(
     const APIres = await fetch(
       `https://standup-proj.herokuapp.com/teams/members/${team_id}`,
       {
-        headers: { mode: "no-cors", "Access-Control-Allow-Origin": "*" },
+        headers: { "Access-Control-Allow-Origin": "*" },
       }
     );
     const users = await APIres.json();

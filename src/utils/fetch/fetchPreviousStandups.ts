@@ -7,7 +7,7 @@ export default async function fetchPreviousStandups(
     const APIres = await fetch(
       `https://standup-proj.herokuapp.com/standups/previous/${teamID}`,
       {
-        headers: { mode: "no-cors" },
+        headers: { "Access-Control-Allow-Origin": "*" },
       }
     );
     const data = await APIres.json();
