@@ -10,6 +10,9 @@ interface ActivitiesDisplayProps {
   chairID: number;
   activities: ActivitiesInterface[];
   standup: StandupInterface;
+  setActivities: React.Dispatch<
+    React.SetStateAction<ActivitiesInterface[] | undefined>
+  >;
 }
 
 export default function ActivitiesDisplay(
@@ -52,6 +55,7 @@ export default function ActivitiesDisplay(
           setEditActivityIsOpen={setEditActivityIsOpen}
           activity={activity}
           standup={props.standup}
+          setActivities={props.setActivities}
         />
       </div>
     </div>
@@ -75,6 +79,7 @@ export default function ActivitiesDisplay(
         standup={props.standup}
         addActivityIsOpen={addActivityIsOpen}
         setAddActivityIsOpen={setAddActivityIsOpen}
+        setActivities={props.setActivities}
       />
     </>
   );
