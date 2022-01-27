@@ -1,10 +1,15 @@
 import ActivitiesInterface from "../interfaces/ActivitiesInterface";
 
+interface httpResponsesProps {
+  status: string;
+  data: ActivitiesInterface[];
+}
+
 export default async function updateActivity(
   inputActivity: ActivitiesInterface
-): Promise<void> {
+): Promise<void | ActivitiesInterface> {
   try {
-    await fetch(
+    const response = await fetch(
       `https://standup-proj.herokuapp.com/activity/${inputActivity.id}`,
       {
         method: "PUT",
@@ -19,6 +24,8 @@ export default async function updateActivity(
         }),
       }
     );
+    const jsonBody: httpResponsesProps = await response.json();
+    return jsonBody.data[0];
   } catch (error) {
     console.error(error);
   }
