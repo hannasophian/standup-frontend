@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Modal from "react-modal";
+import postStandup from "../utils/fetch/postStandup";
 import currentDate from "../utils/helpers/currentDate";
 import NewStandupInterface from "../utils/interfaces/NewStandupInterface";
 import { UserInterface } from "../utils/interfaces/UserInterface";
@@ -34,14 +35,14 @@ export default function ModalNewStandup(
     if (inputDetails.time === null || inputDetails.chair_id === null) {
       window.alert("Cannot submit standup with no time or chair");
     } else {
-      console.log(inputDetails);
-      // updateStandup({
-      //   ...inputDetails,
-      //   time:
-      //     inputDetails.time[inputDetails.time.length - 1] === "Z"
-      //       ? inputDetails.time
-      //       : inputDetails.time + "Z",
-      // });
+      // console.log(inputDetails);
+      postStandup({
+        ...inputDetails,
+        time:
+          inputDetails.time[inputDetails.time.length - 1] === "Z"
+            ? inputDetails.time
+            : inputDetails.time + "Z",
+      });
       props.setNewStandupIsOpen(false);
     }
   }
@@ -75,7 +76,7 @@ export default function ModalNewStandup(
             name=""
             onChange={(e) => {
               setInputDetails({ ...inputDetails, time: e.target.value });
-              console.log(e.target.value);
+              // console.log(e.target.value);
             }}
             value={
               inputDetails.time.includes("Z")
