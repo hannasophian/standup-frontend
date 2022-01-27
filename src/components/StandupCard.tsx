@@ -60,6 +60,7 @@ export default function StandupCard(props: {
           chairID={props.standup.chair_id}
           activities={activities}
           standup={props.standup}
+          setActivities={setActivities}
         />
       )}
 
@@ -76,6 +77,8 @@ export default function StandupCard(props: {
         setEditStandupIsOpen={setEditStandupIsOpen}
         standup={props.standup}
         teamMembers={props.teamMembers}
+        setNextStandup={props.setNextStandup}
+        setPreviousStandups={props.setPreviousStandups}
       />
     </div>
   );

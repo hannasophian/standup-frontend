@@ -113,11 +113,14 @@ export default function Dashboard(props: PageProps): JSX.Element {
             </div>
           </div>
           <ModalNewStandup
+            setNextStandup={setNextStandup}
+            setPreviousStandups={setPreviousStandups}
             newStandupIsOpen={newStandupIsOpen}
             setNewStandupIsOpen={setNewStandupIsOpen}
             teamMembers={teamMembers}
             teamID={props.team}
             currentUserID={props.currentUser.id}
+            nextStandup={nextStandup}
           />
         </div>
       </div>

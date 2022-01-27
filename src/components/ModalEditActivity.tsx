@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Modal from "react-modal";
+import fetchActivities from "../utils/fetch/fetchActivities";
 import updateActivity from "../utils/fetch/updateActivity";
 import toStringDate from "../utils/helpers/toStringDate";
 import ActivitiesInterface from "../utils/interfaces/ActivitiesInterface";
@@ -10,6 +11,9 @@ interface EditActivityProps {
   setEditActivityIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   activity: ActivitiesInterface;
   standup: StandupInterface;
+  setActivities: React.Dispatch<
+    React.SetStateAction<ActivitiesInterface[] | undefined>
+  >;
 }
 
 export default function ModalEditActivity(
@@ -19,13 +23,19 @@ export default function ModalEditActivity(
     props.activity
   );
 
-  function handleSubmit() {
+  async function handleSubmit() {
     if (inputActivity.name === null || inputActivity.name === "") {
       window.alert("Cannot submit activity with no title");
     } else {
-      console.log(inputActivity);
-      updateActivity(inputActivity);
+      // console.log(inputActivity);
       props.setEditActivityIsOpen(false);
+
+      await updateActivity(inputActivity);
+      fetchActivities(props.standup.id).then((res) => {
+        if (res) {
+          props.setActivities(res);
+        }
+      });
     }
   }
   return (

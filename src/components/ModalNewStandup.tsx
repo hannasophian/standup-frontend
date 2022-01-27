@@ -1,8 +1,10 @@
 import { useState } from "react";
 import Modal from "react-modal";
+import fetchNextStandup from "../utils/fetch/fetchNextStandup";
 import postStandup from "../utils/fetch/postStandup";
 import currentDate from "../utils/helpers/currentDate";
 import NewStandupInterface from "../utils/interfaces/NewStandupInterface";
+import StandupInterface from "../utils/interfaces/StandupInterface";
 import { UserInterface } from "../utils/interfaces/UserInterface";
 
 interface ModalNewStandupProps {
@@ -11,6 +13,13 @@ interface ModalNewStandupProps {
   teamMembers: UserInterface[];
   teamID: number;
   currentUserID: number;
+  setNextStandup: React.Dispatch<
+    React.SetStateAction<StandupInterface | undefined>
+  >;
+  setPreviousStandups: React.Dispatch<
+    React.SetStateAction<StandupInterface[] | undefined>
+  >;
+  nextStandup: StandupInterface | undefined;
 }
 
 export default function ModalNewStandup(
@@ -42,7 +51,11 @@ export default function ModalNewStandup(
           inputDetails.time[inputDetails.time.length - 1] === "Z"
             ? inputDetails.time
             : inputDetails.time + "Z",
-      });
+      }).then(() =>
+        fetchNextStandup(props.teamID).then((res) =>
+          props.setNextStandup(res ? res : props.nextStandup)
+        )
+      );
       props.setNewStandupIsOpen(false);
     }
   }

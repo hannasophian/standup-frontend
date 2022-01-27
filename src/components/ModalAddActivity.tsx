@@ -1,7 +1,9 @@
 import { useState } from "react";
 import Modal from "react-modal";
+import fetchActivities from "../utils/fetch/fetchActivities";
 import postActivity from "../utils/fetch/postActivity";
 import toStringDate from "../utils/helpers/toStringDate";
+import ActivitiesInterface from "../utils/interfaces/ActivitiesInterface";
 import InputActivityInterface from "../utils/interfaces/InputActivityInterface";
 import StandupInterface from "../utils/interfaces/StandupInterface";
 
@@ -9,6 +11,9 @@ interface AddActivityProps {
   addActivityIsOpen: boolean;
   setAddActivityIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   standup: StandupInterface;
+  setActivities: React.Dispatch<
+    React.SetStateAction<ActivitiesInterface[] | undefined>
+  >;
 }
 
 export default function ModalAddActivity(props: AddActivityProps): JSX.Element {
@@ -22,13 +27,18 @@ export default function ModalAddActivity(props: AddActivityProps): JSX.Element {
   const [inputActivity, setInputActivity] =
     useState<InputActivityInterface>(initialInputActivity);
 
-  function handleSubmit() {
+  async function handleSubmit() {
     if (inputActivity.name === null || inputActivity.name === "") {
       window.alert("Cannot submit activity with no title");
     } else {
-      console.log(inputActivity);
-      postActivity(inputActivity);
+      // console.log(inputActivity);
       props.setAddActivityIsOpen(false);
+      await postActivity(inputActivity);
+      fetchActivities(props.standup.id).then((res) => {
+        if (res) {
+          props.setActivities(res);
+        }
+      });
       setInputActivity(initialInputActivity);
     }
   }
