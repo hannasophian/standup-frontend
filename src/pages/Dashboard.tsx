@@ -11,6 +11,7 @@ import "../css/app.css";
 import "../css/standupcard.css";
 import { UserInterface } from "../utils/interfaces/UserInterface";
 import fetchTeamMembers from "../utils/fetch/fetchTeamMembers";
+import ModalNewStandup from "../components/ModalNewStandup";
 
 export default function Dashboard(props: PageProps): JSX.Element {
   const [teamName, setTeamName] = useState<string>("");
@@ -19,6 +20,7 @@ export default function Dashboard(props: PageProps): JSX.Element {
     useState<StandupInterface[]>();
   const [teamMembers, setTeamMembers] = useState<UserInterface[]>([]);
   const [seeMembers, setSeeMembers] = useState<boolean>(false);
+  const [newStandupIsOpen, setNewStandupIsOpen] = useState<boolean>(false);
 
   useEffect(() => {
     fetchTeamName(props.team).then((res) => {
@@ -103,7 +105,20 @@ export default function Dashboard(props: PageProps): JSX.Element {
             <h2>Previous StandUps</h2>
             {previousStandups && previousCards}
           </div>
-          <div className="right-col">This is the side stuff</div>
+          <div className="right-col">
+            <div className="row">
+              <button onClick={() => setNewStandupIsOpen(true)}>
+                New Standup
+              </button>
+            </div>
+          </div>
+          <ModalNewStandup
+            newStandupIsOpen={newStandupIsOpen}
+            setNewStandupIsOpen={setNewStandupIsOpen}
+            teamMembers={teamMembers}
+            teamID={props.team}
+            currentUserID={props.currentUser.id}
+          />
         </div>
       </div>
     </div>
