@@ -1,10 +1,16 @@
 import NewStandupInterface from "../interfaces/NewStandupInterface";
+import StandupInterface from "../interfaces/StandupInterface";
+
+interface httpResponsesProps {
+  status: string;
+  data: StandupInterface[];
+}
 
 export default async function postStandup(
   inputStandup: NewStandupInterface
-): Promise<void> {
+): Promise<void | StandupInterface> {
   try {
-    await fetch(
+    const response = await fetch(
       `https://standup-proj.herokuapp.com/standups/${inputStandup.team_id}`,
       {
         method: "POST",
@@ -19,6 +25,8 @@ export default async function postStandup(
         }),
       }
     );
+    const jsonBody: httpResponsesProps = await response.json();
+    return jsonBody.data[0];
   } catch (error) {
     console.error(error);
   }
