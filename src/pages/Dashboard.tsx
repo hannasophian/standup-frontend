@@ -26,7 +26,7 @@ export default function Dashboard(props: PageProps): JSX.Element {
   const [seeMembers, setSeeMembers] = useState<boolean>(false);
   const [newStandupIsOpen, setNewStandupIsOpen] = useState<boolean>(false);
   const [wheelURL, setWheelURL] = useState<string>("wheelofnames.com");
-  const [futureStandups, setFutureStandups] = useState<StandupInterface[]>([]);
+  const [futureStandups, setFutureStandups] = useState<StandupInterface[]>();
 
   useEffect(() => {
     fetchTeamName(props.team).then((res) => {
@@ -75,6 +75,7 @@ export default function Dashboard(props: PageProps): JSX.Element {
           standup={standup}
           currentUserID={props.currentUser.id}
           teamMembers={teamMembers}
+          setFutureStandups={setFutureStandups}
         />
       );
     })
@@ -117,6 +118,7 @@ export default function Dashboard(props: PageProps): JSX.Element {
                 standup={nextStandup}
                 currentUserID={props.currentUser.id}
                 teamMembers={teamMembers}
+                setFutureStandups={setFutureStandups}
               />
             )}
             <br />
@@ -134,7 +136,9 @@ export default function Dashboard(props: PageProps): JSX.Element {
                 <button>Wheel of Names</button>
               </a>
             </div>
-            <FutureStandups team_id={props.team} standups={futureStandups} />
+            {futureStandups && (
+              <FutureStandups team_id={props.team} standups={futureStandups} />
+            )}
           </div>
           <ModalNewStandup
             setNextStandup={setNextStandup}
@@ -145,6 +149,7 @@ export default function Dashboard(props: PageProps): JSX.Element {
             teamID={props.team}
             currentUserID={props.currentUser.id}
             nextStandup={nextStandup}
+            setFutureStandups={setFutureStandups}
           />
         </div>
       </div>

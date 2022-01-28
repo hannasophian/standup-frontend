@@ -23,5 +23,10 @@ export default function FutureStandups(
     );
   });
 
-  return <div className="future-standups">{standupCards}</div>;
+  return (
+    <div className="future-standups">
+      <h3>Future Standups</h3>
+      {standupCards}
+    </div>
+  );
 }

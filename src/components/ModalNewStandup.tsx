@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Modal from "react-modal";
+import fetchFutureStandups from "../utils/fetch/fetchFutureStandups";
 import fetchNextStandup from "../utils/fetch/fetchNextStandup";
 import postStandup from "../utils/fetch/postStandup";
 import currentDate from "../utils/helpers/currentDate";
@@ -20,6 +21,9 @@ interface ModalNewStandupProps {
     React.SetStateAction<StandupInterface[] | undefined>
   >;
   nextStandup: StandupInterface | undefined;
+  setFutureStandups: React.Dispatch<
+    React.SetStateAction<StandupInterface[] | undefined>
+  >;
 }
 
 export default function ModalNewStandup(
@@ -40,22 +44,29 @@ export default function ModalNewStandup(
     );
   });
 
-  function handleSubmit() {
+  async function handleSubmit() {
     if (inputDetails.time === null || inputDetails.chair_id === null) {
       window.alert("Cannot submit standup with no time or chair");
     } else {
       // console.log(inputDetails);
-      postStandup({
+      await postStandup({
         ...inputDetails,
         time:
           inputDetails.time[inputDetails.time.length - 1] === "Z"
             ? inputDetails.time
             : inputDetails.time + "Z",
-      }).then(() =>
-        fetchNextStandup(props.teamID).then((res) =>
-          props.setNextStandup(res ? res : props.nextStandup)
-        )
+      });
+
+      fetchNextStandup(props.teamID).then((res) =>
+        props.setNextStandup(res ? res : props.nextStandup)
       );
+
+      fetchFutureStandups(props.teamID).then((res) => {
+        if (res) {
+          props.setFutureStandups(res);
+        }
+      });
+
       props.setNewStandupIsOpen(false);
     }
   }

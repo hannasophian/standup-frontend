@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Modal from "react-modal";
+import fetchFutureStandups from "../utils/fetch/fetchFutureStandups";
 import fetchNextStandup from "../utils/fetch/fetchNextStandup";
 import fetchPreviousStandups from "../utils/fetch/fetchPreviousStandups";
 import updateStandup from "../utils/fetch/updateStandup";
@@ -19,6 +20,9 @@ interface EditStandupProps {
     React.SetStateAction<StandupInterface | undefined>
   >;
   setPreviousStandups: React.Dispatch<
+    React.SetStateAction<StandupInterface[] | undefined>
+  >;
+  setFutureStandups: React.Dispatch<
     React.SetStateAction<StandupInterface[] | undefined>
   >;
 }
@@ -59,6 +63,11 @@ export default function ModalEditStandup(props: EditStandupProps): JSX.Element {
       fetchPreviousStandups(props.standup.team_id).then((res) => {
         if (res) {
           props.setPreviousStandups(res);
+        }
+      });
+      fetchFutureStandups(props.standup.team_id).then((res) => {
+        if (res) {
+          props.setFutureStandups(res);
         }
       });
 
