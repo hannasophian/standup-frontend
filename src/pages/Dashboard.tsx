@@ -137,7 +137,14 @@ export default function Dashboard(props: PageProps): JSX.Element {
               </a>
             </div>
             {futureStandups && (
-              <FutureStandups team_id={props.team} standups={futureStandups} />
+              <FutureStandups
+                team_id={props.team}
+                standups={futureStandups}
+                teamMembers={teamMembers}
+                setFutureStandups={setFutureStandups}
+                setNextStandup={setNextStandup}
+                setPreviousStandups={setPreviousStandups}
+              />
             )}
           </div>
           <ModalNewStandup
