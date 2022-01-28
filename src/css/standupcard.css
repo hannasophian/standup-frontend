@@ -47,3 +47,9 @@ h3 {
 #comment-input {
   width: 100%;
 }
+
+.single-activity {
+  background-color: white;
+  margin: 5px;
+  padding: 5px;
+}
