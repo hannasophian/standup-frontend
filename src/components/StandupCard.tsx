@@ -18,6 +18,9 @@ export default function StandupCard(props: {
   setPreviousStandups: React.Dispatch<
     React.SetStateAction<StandupInterface[] | undefined>
   >;
+  setFutureStandups: React.Dispatch<
+    React.SetStateAction<StandupInterface[] | undefined>
+  >;
 }): JSX.Element {
   const [activities, setActivities] = useState<ActivitiesInterface[]>();
   const [editStandupIsOpen, setEditStandupIsOpen] = useState<boolean>(false);
@@ -79,6 +82,7 @@ export default function StandupCard(props: {
         teamMembers={props.teamMembers}
         setNextStandup={props.setNextStandup}
         setPreviousStandups={props.setPreviousStandups}
+        setFutureStandups={props.setFutureStandups}
       />
     </div>
   );

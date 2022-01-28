@@ -30,6 +30,7 @@ export default function Home(props: PageProps): JSX.Element {
 
   function logIn(id: number) {
     const user = getUserByID(id);
+    // console.log(user)
     props.setCurrentUser(user);
     props.setTeam(user.team_id);
   }
