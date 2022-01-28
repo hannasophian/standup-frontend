@@ -25,3 +25,9 @@ h2 {
 .right-col {
   flex: 1;
 }
+
+.future-standup-card {
+  background-color: #feece9;
+  padding: 5px;
+  margin: 5px;
+}
