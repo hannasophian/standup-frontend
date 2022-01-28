@@ -100,7 +100,7 @@ export default function ModalEditStandup(props: EditStandupProps): JSX.Element {
             name=""
             onChange={(e) => {
               setInputDetails({ ...inputDetails, time: e.target.value });
-              console.log(e.target.value);
+              // console.log(e.target.value);
             }}
             value={
               inputDetails.time.includes("Z")

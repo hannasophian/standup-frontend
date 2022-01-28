@@ -31,7 +31,7 @@ export default function ModalNewStandup(
     chair_id: props.currentUserID,
     meeting_link: null,
   });
-
+  // console.log(currentDate());
   const usersList = props.teamMembers.map((user) => {
     return (
       <option value={user.id} key={user.id}>
