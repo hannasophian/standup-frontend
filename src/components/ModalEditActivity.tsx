@@ -23,6 +23,8 @@ export default function ModalEditActivity(
     props.activity
   );
 
+  // console.log(props.activity)
+
   async function handleSubmit() {
     if (inputActivity.name === null || inputActivity.name === "") {
       window.alert("Cannot submit activity with no title");

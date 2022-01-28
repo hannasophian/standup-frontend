@@ -22,7 +22,7 @@ export default function ActivitiesDisplay(
   const [editActivityIsOpen, setEditActivityIsOpen] = useState<boolean>(false);
 
   const activitylist = props.activities.map((activity) => (
-    <div key={activity.id}>
+    <div className="single-activity" key={activity.id}>
       <div className="row">
         <p key={activity.id} className="col">
           {activity.name}
@@ -38,18 +38,18 @@ export default function ActivitiesDisplay(
       <div className="row">
         {" "}
         <div className="col">
-          {activity.comment && <p>"{activity.comment}"</p>}
+          {activity.comment && <small>"{activity.comment}"</small>}
         </div>
-        <div className="col">
-          {props.currentUserID === props.chairID && (
+        {props.currentUserID === props.chairID && (
+          <div className="col">
             <button
               className="span"
               onClick={() => setEditActivityIsOpen(true)}
             >
               Edit activity
             </button>
-          )}
-        </div>
+          </div>
+        )}
         <ModalEditActivity
           editActivityIsOpen={editActivityIsOpen}
           setEditActivityIsOpen={setEditActivityIsOpen}

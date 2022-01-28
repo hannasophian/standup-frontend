@@ -12,6 +12,8 @@ import "../css/standupcard.css";
 import { UserInterface } from "../utils/interfaces/UserInterface";
 import fetchTeamMembers from "../utils/fetch/fetchTeamMembers";
 import ModalNewStandup from "../components/ModalNewStandup";
+import fetchWheelURL from "../utils/fetch/fetchWheelURL";
+// import { Link } from "react-router-dom";
 
 export default function Dashboard(props: PageProps): JSX.Element {
   const [teamName, setTeamName] = useState<string>("");
@@ -21,6 +23,7 @@ export default function Dashboard(props: PageProps): JSX.Element {
   const [teamMembers, setTeamMembers] = useState<UserInterface[]>([]);
   const [seeMembers, setSeeMembers] = useState<boolean>(false);
   const [newStandupIsOpen, setNewStandupIsOpen] = useState<boolean>(false);
+  const [wheelURL, setWheelURL] = useState<string>("wheelofnames.com");
 
   useEffect(() => {
     fetchTeamName(props.team).then((res) => {
@@ -42,6 +45,12 @@ export default function Dashboard(props: PageProps): JSX.Element {
     fetchTeamMembers(props.team).then((res) => {
       if (res) {
         setTeamMembers(res);
+      }
+    });
+
+    fetchWheelURL(props.team).then((res) => {
+      if (res) {
+        setWheelURL(res);
       }
     });
     // eslint-disable-next-line
@@ -110,6 +119,11 @@ export default function Dashboard(props: PageProps): JSX.Element {
               <button onClick={() => setNewStandupIsOpen(true)}>
                 New Standup
               </button>
+            </div>
+            <div className="row">
+              <a href={wheelURL}>
+                <button>Wheel of Names</button>
+              </a>
             </div>
           </div>
           <ModalNewStandup
