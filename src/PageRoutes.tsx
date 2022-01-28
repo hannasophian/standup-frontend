@@ -10,6 +10,7 @@ export default function PageRoutes(): JSX.Element {
     id: 0,
     name: "",
     team_id: 0,
+    image_url: "",
   });
   const [team, setTeam] = useState<number>(0);
 
