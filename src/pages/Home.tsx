@@ -1,62 +1,98 @@
-import { useEffect, useState } from "react";
-import fetchUsers from "../utils/fetch/fetchUsers";
-import { UserInterface } from "../utils/interfaces/UserInterface";
-import PageProps from "../utils/interfaces/PageProps";
+// import PageProps from "../utils/interfaces/PageProps";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import FormInterface from "../utils/interfaces/FormInterface";
 
-export default function Home(props: PageProps): JSX.Element {
-  const [allUsers, setAllUsers] = useState<UserInterface[]>([]);
-
-  useEffect(() => {
-    fetchUsers().then((res) => {
-      setAllUsers(res ? res : []);
-    });
-  }, []);
-
-  useEffect(() => {
-    console.log(props.currentUser);
-    console.log(props.team);
-  }, [props.currentUser, props.team]);
-
-  const usersList = allUsers.map((user) => {
-    return (
-      <option value={user.id} key={user.id}>
-        {user.name}
-      </option>
-    );
+export default function Home(): JSX.Element {
+  const [formInfo, setFormInfo] = useState<FormInterface>({
+    section: "",
+    station: ["", ""],
+    direction: "",
+    lane: 0,
+    date: "2022-11-01",
+    surveyor_name: "",
+    uploadFile: "",
   });
-
-  function getUserByID(id: number) {
-    const user = allUsers.filter((user) => user.id === id);
-    // props.setCurrentUser(user[0]);
-    return user[0];
-  }
-
-  function logIn(id: number) {
-    const user = getUserByID(id);
-    props.setCurrentUser(user);
-    props.setTeam(user.team_id);
-  }
 
   return (
     <div>
-      <h1>StandUp</h1>
-      <select
-        className="login-dropdown"
-        name="login"
-        id="inner"
-        value={props.currentUser.id}
-        onChange={(e) => {
-          logIn(parseInt(e.target.value));
-        }}
-      >
-        <option value={0} disabled>
-          Choose name to log in
-        </option>
-        {usersList}
-      </select>
+      <h1>OWL 1.0</h1>
+      <button>Register</button>
+      <form>
+        <label htmlFor="sectionInput">Section</label>
+        <input
+          id="sectionInput"
+          onChange={(e) =>
+            setFormInfo({ ...formInfo, section: e.target.value })
+          }
+        />
+        <br />
+        <label htmlFor="stationInput">Station</label>
+        <fieldset id="stationInput">
+          <input
+            id="1"
+            onChange={(e) =>
+              setFormInfo({
+                ...formInfo,
+                station: [e.target.value, formInfo.station[1]],
+              })
+            }
+          />
+          <p>to</p>
+          <input
+            id="2"
+            onChange={(e) =>
+              setFormInfo({
+                ...formInfo,
+                station: [formInfo.station[0], e.target.value],
+              })
+            }
+          />
+        </fieldset>
+
+        <label htmlFor="directionInput">Direction</label>
+        <input
+          id="directionInput"
+          onChange={(e) =>
+            setFormInfo({ ...formInfo, direction: e.target.value })
+          }
+        />
+
+        <br />
+
+        <label htmlFor="laneInput">Lane</label>
+        <input
+          id="laneInput"
+          onChange={(e) =>
+            setFormInfo({ ...formInfo, lane: parseInt(e.target.value) })
+          }
+        />
+        <br />
+        <label htmlFor="dateInput">Date</label>
+        <input
+          id="dateInput"
+          onChange={(e) => setFormInfo({ ...formInfo, date: e.target.value })}
+        />
+
+        <br />
+
+        <label htmlFor="surveyorInput">Name of surveyor</label>
+        <input
+          id="surveyorInput"
+          onChange={(e) =>
+            setFormInfo({ ...formInfo, surveyor_name: e.target.value })
+          }
+        />
+        <br />
+
+        <label htmlFor="fileInput">Input data</label>
+        <fieldset id="fileInput">
+          <button>Upload Here</button>
+          <button>Upload Here</button>
+        </fieldset>
+      </form>
       <Link to="/dashboard">
-        <button>Log In</button>
+        <button onClick={() => console.log(formInfo)}>Process</button>
       </Link>
     </div>
   );
