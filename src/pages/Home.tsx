@@ -17,7 +17,7 @@ export default function Home(): JSX.Element {
   return (
     <div>
       <h1>OWL 1.0</h1>
-      <button>Register</button>
+      <button className="btn btn-primary">Register</button>
       <form>
         <label htmlFor="sectionInput">Section</label>
         <input
