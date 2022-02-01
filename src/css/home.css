@@ -1,0 +1,58 @@
+.home-page {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.home-illustration {
+  height: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+}
+
+body {
+  background-color: #ffbc80;
+}
+
+.login-dropdown {
+  width: 30vw;
+  margin: 10px auto;
+}
+.content {
+  background-color: white;
+  margin: 20px;
+  padding: 30px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+
+  width: 40vw;
+  border-radius: 5%;
+
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.h1 {
+  color: #fc4f4f;
+}
+
+.btn-primary {
+  background-color: #fc4f4f;
+}
+
+@media (orientation: portrait) {
+  .login-dropdown {
+    width: 60vw;
+  }
+  .content {
+    width: auto;
+  }
+}

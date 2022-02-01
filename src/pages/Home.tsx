@@ -3,7 +3,8 @@ import fetchUsers from "../utils/fetch/fetchUsers";
 import { UserInterface } from "../utils/interfaces/UserInterface";
 import PageProps from "../utils/interfaces/PageProps";
 import { Link } from "react-router-dom";
-import "../css/app.css";
+// import "../css/app.css";
+import "../css/home.css";
 
 export default function Home(props: PageProps): JSX.Element {
   const [allUsers, setAllUsers] = useState<UserInterface[]>([]);
@@ -36,25 +37,36 @@ export default function Home(props: PageProps): JSX.Element {
   }
 
   return (
-    <div>
-      <h1>StandUp</h1>
-      <select
-        className="login-dropdown"
-        name="login"
-        id="inner"
-        value={props.currentUser.id}
-        onChange={(e) => {
-          logIn(parseInt(e.target.value));
-        }}
-      >
-        <option value={0} disabled>
-          Choose name to log in
-        </option>
-        {usersList}
-      </select>
-      <Link to="/dashboard">
-        <button>Log In</button>
-      </Link>
+    <div className="home-page">
+      <div className="content">
+        <div className="row">
+          <img
+            className="home-illustration"
+            src="images/conversation.svg"
+            alt="two people having a conversation"
+          />
+          <h1>StandUp</h1>
+          <select
+            className="login-dropdown"
+            name="login"
+            id="inner"
+            value={props.currentUser.id}
+            onChange={(e) => {
+              logIn(parseInt(e.target.value));
+            }}
+          >
+            <option value={0} disabled>
+              Choose name to log in
+            </option>
+            {usersList}
+          </select>
+          <Link to="/dashboard">
+            <button type="button" className="btn btn-primary">
+              Log In
+            </button>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }
