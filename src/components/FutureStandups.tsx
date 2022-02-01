@@ -35,7 +35,20 @@ export default function FutureStandups(
           </div>
           <div className="row">
             <div className="col">
-              <p>{standup.chair_name}</p>
+              <span className="d-inline-block btn float-left">
+                <img
+                  className="user-photo"
+                  src={
+                    standup.chair_image
+                      ? standup.chair_image
+                      : "images/user.png"
+                  }
+                  alt={standup.chair_name}
+                />
+              </span>
+              <span className="d-inline-block">
+                <p>{standup.chair_name}</p>
+              </span>
             </div>
             <div className="col">
               <button onClick={() => setModalIsOpen(true)}>Edit</button>
