@@ -46,8 +46,22 @@ export default function StandupCard(props: {
           </button>
         )}
       </div>
+      <span className="d-inline-block btn float-left">
+        <img
+          className="user-photo"
+          src={
+            props.standup.chair_image
+              ? props.standup.chair_image
+              : "images/user.png"
+          }
+          alt={props.standup.chair_name}
+        />
+      </span>
+      <span className="d-inline-block">
+        <p>Chaired by: {props.standup.chair_name}</p>
+      </span>
 
-      <p>Chaired by: {props.standup.chair_name}</p>
+      {/* <p>Chaired by: {props.standup.chair_name}</p> */}
       {props.standup.meeting_link && (
         <p>
           Meeting Link:{" "}

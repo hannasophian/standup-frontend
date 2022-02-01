@@ -6,4 +6,5 @@ export default interface StandupInterface {
   meeting_link: string | null;
   notes: string | null;
   chair_name: string;
+  chair_image: string | null;
 }
