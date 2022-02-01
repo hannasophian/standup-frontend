@@ -40,6 +40,7 @@ export default function NavBar(props: PageProps): JSX.Element {
           </svg>
           <ModalEditUser
             currentUser={props.currentUser}
+            setCurrentUser={props.setCurrentUser}
             modalIsOpen={modalIsOpen}
             setModalIsOpen={setModalIsOpen}
           />

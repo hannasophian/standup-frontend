@@ -1,12 +1,11 @@
 import { useState } from "react";
 import Modal from "react-modal";
+import updateUser from "../utils/fetch/updateUser";
 import { UserInterface } from "../utils/interfaces/UserInterface";
 
 interface EditUserProps {
   currentUser: UserInterface;
-  //   setCurrentUser: React.Dispatch<
-  //   React.SetStateAction<UserInterface>
-  // >;
+  setCurrentUser: React.Dispatch<React.SetStateAction<UserInterface>>;
   modalIsOpen: boolean;
   setModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -19,21 +18,21 @@ export default function ModalEditUser(props: EditUserProps): JSX.Element {
     image_url: props.currentUser.image_url,
   });
 
-  //   async function handleSubmit() {
-  //     if (inputActivity.name === null || inputActivity.name === "") {
-  //       window.alert("Cannot submit activity with no title");
-  //     } else {
-  //       // console.log(inputActivity);
-  //       props.setEditActivityIsOpen(false);
+  async function handleSubmit() {
+    if (input.name === null || input.name === "") {
+      window.alert("Cannot submit activity with no title");
+    } else {
+      if (input.image_url === "") {
+        console.log(input);
+        setInput({ ...input, image_url: null });
+      }
+      props.setModalIsOpen(false);
 
-  //       await updateActivity(inputActivity);
-  //       fetchActivities(props.standup.id).then((res) => {
-  //         if (res) {
-  //           props.setActivities(res);
-  //         }
-  //       });
-  //     }
-  //   }
+      await updateUser(input);
+      props.setCurrentUser(input);
+    }
+  }
+
   return (
     <Modal
       id="edit-user-modal"
@@ -55,6 +54,14 @@ export default function ModalEditUser(props: EditUserProps): JSX.Element {
         </button>
       </div>
       <div className="modal-body">
+        <label htmlFor="name-input">Display name</label>
+        <input
+          id="name-input"
+          placeholder="Optional"
+          value={input.name}
+          onChange={(e) => setInput({ ...input, name: e.target.value })}
+        ></input>
+
         <label htmlFor="url-input">Profile photo URL</label>
         <input
           id="url-input"
@@ -63,7 +70,7 @@ export default function ModalEditUser(props: EditUserProps): JSX.Element {
           onChange={(e) => setInput({ ...input, image_url: e.target.value })}
         ></input>
 
-        <button /*onClick={handleSubmit}*/>OK</button>
+        <button onClick={handleSubmit}>OK</button>
       </div>
     </Modal>
   );
