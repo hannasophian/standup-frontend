@@ -6,6 +6,7 @@
   justify-content: center;
   height: 100vh;
   width: 100vw;
+  background-color: #ffbc80;
 }
 
 .home-illustration {
@@ -13,10 +14,6 @@
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 20px;
-}
-
-body {
-  background-color: #ffbc80;
 }
 
 .login-dropdown {

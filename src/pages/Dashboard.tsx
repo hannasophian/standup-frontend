@@ -100,9 +100,17 @@ export default function Dashboard(props: PageProps): JSX.Element {
           <header>
             <div className="dashboard-header">
               <h1>{teamName}</h1>
-              <button onClick={() => setSeeMembers(!seeMembers)}>
+              <span
+                className="clickable-text"
+                onClick={() => setSeeMembers(!seeMembers)}
+              >
+                <p>
+                  <u>See all members</u>
+                </p>
+              </span>
+              {/* <button onClick={() => setSeeMembers(!seeMembers)}>
                 See all members
-              </button>
+              </button> */}
 
               {seeMembers && (
                 <div className="member-list">
@@ -110,7 +118,16 @@ export default function Dashboard(props: PageProps): JSX.Element {
                 </div>
               )}
             </div>
+            <div className="mobile-new-standup">
+              <button
+                onClick={() => setNewStandupIsOpen(true)}
+                className="btn btn-primary"
+              >
+                New Standup
+              </button>
+            </div>
           </header>
+          <hr />
           <div className="dashboard-body">
             <div className="standup-display">
               <h2>Next StandUp</h2>
@@ -130,7 +147,10 @@ export default function Dashboard(props: PageProps): JSX.Element {
             </div>
             <div className="right-col">
               <div className="row">
-                <button onClick={() => setNewStandupIsOpen(true)}>
+                <button
+                  onClick={() => setNewStandupIsOpen(true)}
+                  className="btn btn-primary"
+                >
                   New Standup
                 </button>
               </div>
