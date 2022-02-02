@@ -96,68 +96,72 @@ export default function Dashboard(props: PageProps): JSX.Element {
             setCurrentUser={props.setCurrentUser}
           />
         </div>
-        <div className="dashboard-header">
-          <h1>{teamName}</h1>
-          <button onClick={() => setSeeMembers(!seeMembers)}>
-            See all members
-          </button>
-
-          {seeMembers && (
-            <div className="member-list">
-              <p>{memberList}</p>
-            </div>
-          )}
-        </div>
-        <div className="dashboard-body">
-          <div className="standup-display">
-            <h2>Next StandUp</h2>
-            {nextStandup && (
-              <StandupCard
-                setNextStandup={setNextStandup}
-                setPreviousStandups={setPreviousStandups}
-                standup={nextStandup}
-                currentUserID={props.currentUser.id}
-                teamMembers={teamMembers}
-                setFutureStandups={setFutureStandups}
-              />
-            )}
-            <br />
-            <h2>Previous StandUps</h2>
-            {previousStandups && previousCards}
-          </div>
-          <div className="right-col">
-            <div className="row">
-              <button onClick={() => setNewStandupIsOpen(true)}>
-                New Standup
+        <div className="page-content">
+          <header>
+            <div className="dashboard-header">
+              <h1>{teamName}</h1>
+              <button onClick={() => setSeeMembers(!seeMembers)}>
+                See all members
               </button>
+
+              {seeMembers && (
+                <div className="member-list">
+                  <p>{memberList}</p>
+                </div>
+              )}
             </div>
-            <div className="row">
-              <a href={wheelURL}>
-                <button>Wheel of Names</button>
-              </a>
+          </header>
+          <div className="dashboard-body">
+            <div className="standup-display">
+              <h2>Next StandUp</h2>
+              {nextStandup && (
+                <StandupCard
+                  setNextStandup={setNextStandup}
+                  setPreviousStandups={setPreviousStandups}
+                  standup={nextStandup}
+                  currentUserID={props.currentUser.id}
+                  teamMembers={teamMembers}
+                  setFutureStandups={setFutureStandups}
+                />
+              )}
+              <br />
+              <h2>Previous StandUps</h2>
+              {previousStandups && previousCards}
             </div>
-            {futureStandups && (
-              <FutureStandups
-                team_id={props.team}
-                standups={futureStandups}
-                teamMembers={teamMembers}
-                setFutureStandups={setFutureStandups}
-                setNextStandup={setNextStandup}
-                setPreviousStandups={setPreviousStandups}
-              />
-            )}
+            <div className="right-col">
+              <div className="row">
+                <button onClick={() => setNewStandupIsOpen(true)}>
+                  New Standup
+                </button>
+              </div>
+              <div className="row">
+                <a href={wheelURL}>
+                  <button>Wheel of Names</button>
+                </a>
+              </div>
+              {futureStandups && (
+                <FutureStandups
+                  team_id={props.team}
+                  standups={futureStandups}
+                  teamMembers={teamMembers}
+                  setFutureStandups={setFutureStandups}
+                  setNextStandup={setNextStandup}
+                  setPreviousStandups={setPreviousStandups}
+                />
+              )}
+            </div>
+            <ModalNewStandup
+              setNextStandup={setNextStandup}
+              setPreviousStandups={setPreviousStandups}
+              newStandupIsOpen={newStandupIsOpen}
+              setNewStandupIsOpen={setNewStandupIsOpen}
+              teamMembers={teamMembers}
+              teamID={props.team}
+              currentUserID={props.currentUser.id}
+              nextStandup={nextStandup}
+              setFutureStandups={setFutureStandups}
+            />
           </div>
-          <ModalNewStandup
-            setNextStandup={setNextStandup}
-            setPreviousStandups={setPreviousStandups}
-            newStandupIsOpen={newStandupIsOpen}
-            setNewStandupIsOpen={setNewStandupIsOpen}
-            teamMembers={teamMembers}
-            teamID={props.team}
-            currentUserID={props.currentUser.id}
-            nextStandup={nextStandup}
-            setFutureStandups={setFutureStandups}
-          />
         </div>
       </div>
     </div>

@@ -19,11 +19,11 @@ export default function NavBar(props: PageProps): JSX.Element {
           <div className="user-navbar-text">
             <div className="container">
               <span className="d-inline-block">
-                Hi, {props.currentUser.name}
+                <p>Hi, {props.currentUser.name}</p>
               </span>
               <span className="d-inline-block btn float-right">
                 <img
-                  className="user-photo"
+                  className="nav-user-photo"
                   src={
                     props.currentUser.image_url
                       ? props.currentUser.image_url

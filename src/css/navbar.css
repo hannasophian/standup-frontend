@@ -20,3 +20,24 @@ nav {
   height: 50px;
   box-shadow: -4px 0 8px 0 rgba(0, 0, 0, 0.2);
 }
+
+.nav-user-photo {
+  height: 30px;
+  border-radius: 100%;
+}
+
+@media (orientation: portrait) {
+  nav {
+    height: 80px;
+  }
+  .navbar-logo {
+    font-size: 30px;
+  }
+  .nav-user-photo {
+    height: 50px;
+  }
+
+  p {
+    font-size: 20px;
+  }
+}

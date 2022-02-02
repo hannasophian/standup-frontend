@@ -20,14 +20,6 @@ h1 {
   width: 100%;
 }
 
-.dashboard {
-  text-align: center;
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* align-items: center; */
-  /* justify-content: center; */
-}
-
 h2 {
   font-family: "Merriweather", serif;
   font-size: 30px;
@@ -35,6 +27,7 @@ h2 {
 
 .dashboard-body {
   display: flex;
+  /* width: 80%; */
 }
 
 .standup-display {
@@ -49,4 +42,21 @@ h2 {
   background-color: #feece9;
   padding: 5px;
   margin: 5px;
+}
+
+header {
+  /* width: 80%; */
+  text-align: left;
+  /* margin: 0 auto; */
+}
+
+.page-content {
+  width: 80%;
+  margin: 0 auto;
+}
+
+@media (orientation: portrait) {
+  body {
+    padding-top: 80px;
+  }
 }
