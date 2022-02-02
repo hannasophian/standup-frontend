@@ -3,7 +3,6 @@ import fetchUsers from "../utils/fetch/fetchUsers";
 import { UserInterface } from "../utils/interfaces/UserInterface";
 import PageProps from "../utils/interfaces/PageProps";
 import { Link } from "react-router-dom";
-// import "../css/app.css";
 import "../css/home.css";
 
 export default function Home(props: PageProps): JSX.Element {

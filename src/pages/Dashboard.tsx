@@ -7,7 +7,7 @@ import fetchPreviousStandups from "../utils/fetch/fetchPreviousStandups";
 import fetchTeamName from "../utils/fetch/fetchTeamName";
 import PageProps from "../utils/interfaces/PageProps";
 import StandupInterface from "../utils/interfaces/StandupInterface";
-import "../css/app.css";
+import "../css/dashboard.css";
 import "../css/standupcard.css";
 import { UserInterface } from "../utils/interfaces/UserInterface";
 import fetchTeamMembers from "../utils/fetch/fetchTeamMembers";
@@ -87,7 +87,7 @@ export default function Dashboard(props: PageProps): JSX.Element {
 
   return (
     <div className="dashboard">
-      <div className="container">
+      <div className="container-fluid">
         <div className="row">
           <NavBar
             team={props.team}
