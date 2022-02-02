@@ -110,7 +110,13 @@ export default function Dashboard(props: PageProps): JSX.Element {
                 </div>
               )}
             </div>
+            <div className="mobile-new-standup">
+              <button onClick={() => setNewStandupIsOpen(true)}>
+                New Standup
+              </button>
+            </div>
           </header>
+          <hr />
           <div className="dashboard-body">
             <div className="standup-display">
               <h2>Next StandUp</h2>
