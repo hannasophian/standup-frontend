@@ -2,31 +2,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import FormInterface from "../utils/interfaces/FormInterface";
-
-const styles = {
-  header: {
-    backgroundColor: "#fcca03"
-  },
-  label: {
-    width : "15%",
-    paddingLeft: "1%",
-  },
-  h4: {
-    backgroundColor: "#fcca03",
-    paddingLeft: "1%",
-    marginBottom: 0
-  },
-  h5: {
-    backgroundColor: "#dedede",
-    paddingLeft: "1%"
-  },
-  form: {
-    borderStyle: "solid",
-    borderColor: "#dedede",
-    borderWidth: "1px",
-    padding: 0
-  }
-} as const;
+import "../stylesheets/home.css";
 
 export default function Home(): JSX.Element {
   const [formInfo, setFormInfo] = useState<FormInterface>({
@@ -42,7 +18,7 @@ export default function Home(): JSX.Element {
   return (
     <div>
 
-      <div className="row align-items-center justify-content-center p-1" style={styles.header}>
+      <div className="row align-items-center justify-content-center p-1" id="header">
         <h1 className="col-sm-10">OWL 1.0</h1>
         <div className="col-sm-1">
           <button className="btn btn-primary">Register</button>
@@ -54,11 +30,11 @@ export default function Home(): JSX.Element {
 
         </div>
 
-        <form className="col-sm-10" style={styles.form}>
-          <h4 style={styles.h4}>INPUT DATA</h4>
-          <h5 style={styles.h5}>INFORMATION</h5>
+        <form className="col-sm-10">
+          <h4>INPUT DATA</h4>
+          <h5>INFORMATION</h5>
 
-          <label htmlFor="sectionInput" style={styles.label}>Section</label>
+          <label htmlFor="sectionInput">Section</label>
           <input
             id="sectionInput"
             onChange={(e) =>
@@ -67,7 +43,7 @@ export default function Home(): JSX.Element {
           />
           <br/>
 
-          <label htmlFor="stationInput" style={styles.label}>Station</label>
+          <label htmlFor="stationInput">Station</label>
           <fieldset id="stationInput">
             <input
               id="1"
@@ -91,7 +67,7 @@ export default function Home(): JSX.Element {
           </fieldset>          
           
 
-          <label htmlFor="directionInput" style={styles.label}>Direction</label>
+          <label htmlFor="directionInput">Direction</label>
           <input
             id="directionInput"
             onChange={(e) =>
@@ -101,7 +77,7 @@ export default function Home(): JSX.Element {
 
           <br />
 
-          <label htmlFor="laneInput" style={styles.label}>Lane</label>
+          <label htmlFor="laneInput">Lane</label>
           <input
             id="laneInput"
             onChange={(e) =>
@@ -109,7 +85,7 @@ export default function Home(): JSX.Element {
             }
           />
           <br />
-          <label htmlFor="dateInput" style={styles.label}>Date</label>
+          <label htmlFor="dateInput">Date</label>
           <input
             id="dateInput"
             onChange={(e) => setFormInfo({ ...formInfo, date: e.target.value })}
@@ -117,7 +93,7 @@ export default function Home(): JSX.Element {
 
           <br />
 
-          <label htmlFor="surveyorInput" style={styles.label}>Name of surveyor</label>
+          <label htmlFor="surveyorInput">Name of surveyor</label>
           <input
             id="surveyorInput"
             onChange={(e) =>
@@ -126,7 +102,7 @@ export default function Home(): JSX.Element {
           />
           <br />
 
-          <label htmlFor="fileInput" style={styles.label}>Input data</label>
+          <label htmlFor="fileInput">Input data</label>
           <fieldset id="fileInput">
             <button>Upload Here</button>
             <button>Upload Here</button>
