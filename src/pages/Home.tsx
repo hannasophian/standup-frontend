@@ -19,7 +19,12 @@ const styles = {
   h5: {
     backgroundColor: "#dedede",
     paddingLeft: "1%"
-
+  },
+  form: {
+    borderStyle: "solid",
+    borderColor: "#dedede",
+    borderWidth: "1px",
+    padding: 0
   }
 } as const;
 
@@ -48,7 +53,8 @@ export default function Home(): JSX.Element {
         <div className="col-sm-2">
 
         </div>
-        <form className="col-sm-10">
+
+        <form className="col-sm-10" style={styles.form}>
           <h4 style={styles.h4}>INPUT DATA</h4>
           <h5 style={styles.h5}>INFORMATION</h5>
 
