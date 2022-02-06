@@ -3,7 +3,7 @@ import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import FormInterface from "../utils/interfaces/FormInterface";
-import styles from "../stylesheets/Home.module.css";
+import "../css/Home.css";
 
 export default function Home(): JSX.Element {
   const [formInfo, setFormInfo] = useState<FormInterface>({
