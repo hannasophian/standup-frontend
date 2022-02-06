@@ -1,3 +1,5 @@
+declare module "*.module.css";
+
 export default interface FormInterface {
   section: string;
   station: string[];
