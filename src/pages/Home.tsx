@@ -119,11 +119,31 @@ export default function Home(): JSX.Element {
             />
             <br />
             
-            <label htmlFor="fileInput">Input data</label>
-            <fieldset id="fileInput">
-              <button>Upload Here</button>&nbsp;&nbsp;
-              <button>Upload Here</button>
-            </fieldset>
+            <div id="folder">
+              <label id="labelFolderInput" htmlFor="folderInput">Folder</label>
+              <fieldset id="folderInput">
+                  <input
+                    id="folder1"
+                    className="mt-0"
+                    onChange={(e) =>
+                      setFormInfo({
+                        ...formInfo,
+                        station: [e.target.value, formInfo.station[1]],
+                      })
+                    }
+                  />
+                  <br />
+                  <input
+                    id="folder2"
+                    onChange={(e) =>
+                      setFormInfo({
+                        ...formInfo,
+                        station: [formInfo.station[0], e.target.value],
+                      })
+                    }
+                  />
+              </fieldset>
+            </div>
             
             <div className="d-flex justify-content-end">
               <Link to="/dashboard">
