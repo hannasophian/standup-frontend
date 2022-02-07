@@ -118,7 +118,7 @@ export default function Home(): JSX.Element {
               }
             />
             <br />
-
+            
             <label htmlFor="fileInput">Input data</label>
             <fieldset id="fileInput">
               <button>Upload Here</button>&nbsp;&nbsp;
@@ -127,7 +127,7 @@ export default function Home(): JSX.Element {
             
             <div className="d-flex justify-content-end">
               <Link to="/dashboard">
-                <button onClick={() => console.log(formInfo)} className="btn btn-primary">Process</button>
+                <button onClick={() => console.log(formInfo)} id="process" className="btn btn-primary">Process</button>
               </Link>
             </div>
           </div>
