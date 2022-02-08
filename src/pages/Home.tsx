@@ -125,6 +125,7 @@ export default function Home(): JSX.Element {
                   <input
                     id="folder1"
                     className="mt-0"
+                    placeholder=""
                     onChange={(e) =>
                       setFormInfo({
                         ...formInfo,
