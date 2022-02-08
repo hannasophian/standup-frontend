@@ -1,9 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Merriweather&display=swap");
 
-.standupcard {
+.card {
   background-color: #feece9;
-  padding: 20px;
+  /* padding: 20px; */
   margin: 10px;
+}
+
+.card-title {
+  font-family: "Merriweather", serif;
 }
 
 .notesdisplay > button {
@@ -16,6 +21,12 @@
 
 .card-header {
   display: flex;
+  outline-width: 0;
+}
+
+.container {
+  padding: 0;
+  margin: 0;
 }
 
 body {
@@ -48,8 +59,16 @@ h3 {
   width: 100%;
 }
 
-.single-activity {
+.card-subheader {
+  font-family: "Merriweather", serif;
+  font-size: 18px;
+}
+.activity-section {
   background-color: white;
+}
+
+.single-activity {
+  /* background-color: white; */
   margin: 5px;
   padding: 5px;
 }

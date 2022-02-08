@@ -62,11 +62,13 @@ export default function ActivitiesDisplay(
   ));
 
   return (
-    <>
+    <div className="activity-section">
       <div className="activity-header">
         {/* <> Only shows activities Header if there are activities */}
         {(props.currentUserID === props.chairID ||
-          props.activities.length !== 0) && <p>Activities</p>}
+          props.activities.length !== 0) && (
+          <h4 className="card-subheader">Activities</h4>
+        )}
       </div>
       <div className="container">
         {props.activities.length !== 0 && activitylist}
@@ -81,6 +83,6 @@ export default function ActivitiesDisplay(
         setAddActivityIsOpen={setAddActivityIsOpen}
         setActivities={props.setActivities}
       />
-    </>
+    </div>
   );
 }
