@@ -17,15 +17,16 @@ export default function Home(): JSX.Element {
 
   return (
     <div>
-      
-
-      <div className="row align-items-center justify-content-center p-1" id="header">
+      <div
+        className="row align-items-center justify-content-center p-1"
+        id="header"
+      >
         <h1 className="col-sm-10">OWL 1.0</h1>
         <div className="col-sm-1">
           <button className="btn btn-secondary">Register</button>
         </div>
       </div>
-      
+
       <div className="row p-4">
         <div className="col-sm-2">
           <div className="row sidebar">
@@ -57,10 +58,12 @@ export default function Home(): JSX.Element {
                 setFormInfo({ ...formInfo, section: e.target.value })
               }
             />
-            <br/>
-            
+            <br />
+
             <div id="station">
-              <label id="labelStationInput" htmlFor="stationInput">Station</label>
+              <label id="labelStationInput" htmlFor="stationInput">
+                Station
+              </label>
               <fieldset id="stationInput">
                 <input
                   id="stationFrom"
@@ -81,7 +84,7 @@ export default function Home(): JSX.Element {
                     })
                   }
                 />
-              </fieldset>  
+              </fieldset>
             </div>
 
             <label htmlFor="directionInput">Direction</label>
@@ -105,7 +108,9 @@ export default function Home(): JSX.Element {
             <label htmlFor="dateInput">Date</label>
             <input
               id="dateInput"
-              onChange={(e) => setFormInfo({ ...formInfo, date: e.target.value })}
+              onChange={(e) =>
+                setFormInfo({ ...formInfo, date: e.target.value })
+              }
             />
 
             <br />
@@ -118,43 +123,39 @@ export default function Home(): JSX.Element {
               }
             />
             <br />
-            
+
             <div id="folder">
-              <label id="labelFolderInput" htmlFor="folderInput">Folder</label>
+              <label id="labelFolderInput" htmlFor="folderInput">
+                Folder
+              </label>
               <fieldset id="folderInput">
-                  <input
-                    id="folder1"
-                    className="mt-0"
-                    placeholder=""
-                    onChange={(e) =>
-                      setFormInfo({
-                        ...formInfo,
-                        station: [e.target.value, formInfo.station[1]],
-                      })
-                    }
-                  />
-                  <br />
-                  <input
-                    id="folder2"
-                    onChange={(e) =>
-                      setFormInfo({
-                        ...formInfo,
-                        station: [formInfo.station[0], e.target.value],
-                      })
-                    }
-                  />
+                <input
+                  id="folder1"
+                  className="mt-0"
+                  placeholder=""
+                  onChange={(e) =>
+                    setFormInfo({
+                      ...formInfo,
+                      station: [e.target.value, formInfo.station[1]],
+                    })
+                  }
+                />
               </fieldset>
             </div>
-            
+
             <div className="d-flex justify-content-end">
               <Link to="/dashboard">
-                <button onClick={() => console.log(formInfo)} id="process" className="btn btn-primary">Process</button>
+                <button
+                  onClick={() => console.log(formInfo)}
+                  id="process"
+                  className="btn btn-primary"
+                >
+                  Process
+                </button>
               </Link>
             </div>
           </div>
         </form>
-        
-
       </div>
     </div>
   );
