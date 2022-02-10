@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import FormInterface from "../utils/interfaces/FormInterface";
 import "../css/Home.css";
+import NavBar from "../components/NavBar";
 
 export default function Home(): JSX.Element {
   const [formInfo, setFormInfo] = useState<FormInterface>({
@@ -17,15 +18,7 @@ export default function Home(): JSX.Element {
 
   return (
     <div>
-      <div
-        className="row align-items-center justify-content-center p-1"
-        id="header"
-      >
-        <h1 className="col-sm-10">OWL 1.0</h1>
-        <div className="col-sm-1">
-          <button className="btn btn-secondary">Register</button>
-        </div>
-      </div>
+      <NavBar />
 
       <div className="row p-4">
         <div className="col-sm-2">
