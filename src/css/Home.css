@@ -1,0 +1,73 @@
+#header {
+  background-color: #fcca03;
+}
+
+label {
+  width: 15%;
+}
+
+h4 {
+  background-color: #fcca03;
+  padding-left: 1%;
+  margin-bottom: 0;
+}
+
+h5 {
+  background-color: #dedede;
+  padding-left: 1%;
+  margin-bottom: 0;
+}
+
+form {
+  border-style: solid;
+  border-color: #dedede;
+  border-width: 1px;
+  padding: 0;
+}
+
+#inputFields * {
+  margin-top: 10px;
+}
+
+#station {
+  padding-bottom: 0;
+}
+
+#process {
+  width: 110%;
+}
+
+#station * {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+#folder {
+  margin-top: 0;
+}
+
+.sidebar {
+  border-style: solid;
+  border-color: #dedede;
+  border-width: 1px;
+  margin-bottom: 4%;
+  margin-right: 16px;
+  padding: 0;
+}
+
+label#labelStationInput,
+#labelFolderInput {
+  position: absolute;
+}
+
+fieldset#stationInput,
+fieldset#folderInput {
+  margin-left: 15%;
+  margin-bottom: 0;
+}
+
+fieldset#stationInput,
+fieldset#folderInput,
+p#station {
+  display: inline-block;
+}
