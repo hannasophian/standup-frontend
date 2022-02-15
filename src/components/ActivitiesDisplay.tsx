@@ -23,33 +23,38 @@ export default function ActivitiesDisplay(
 
   const activitylist = props.activities.map((activity) => (
     <div className="single-activity" key={activity.id}>
-      <div className="row">
-        <p key={activity.id} className="col">
+      <div className="activity-row">
+        <b key={activity.id} className="col">
           {activity.name}
-        </p>
-        <div className="col">
+        </b>
+        <div className="activity-link">
           {activity.url && (
             <a href={activity.url}>
               <button>Go to Activity</button>
             </a>
           )}
         </div>
+        {props.currentUserID === props.chairID && (
+          <div className="edit-icon">
+            <svg
+              onClick={() => setEditActivityIsOpen(true)}
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              className="bi bi-pencil"
+              viewBox="0 0 16 16"
+            >
+              <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+            </svg>
+          </div>
+        )}
       </div>
       <div className="row">
         {" "}
         <div className="col">
           {activity.comment && <small>"{activity.comment}"</small>}
         </div>
-        {props.currentUserID === props.chairID && (
-          <div className="col">
-            <button
-              className="span"
-              onClick={() => setEditActivityIsOpen(true)}
-            >
-              Edit activity
-            </button>
-          </div>
-        )}
         <ModalEditActivity
           editActivityIsOpen={editActivityIsOpen}
           setEditActivityIsOpen={setEditActivityIsOpen}
@@ -69,14 +74,20 @@ export default function ActivitiesDisplay(
           props.activities.length !== 0) && (
           <h4 className="card-subheader">Activities</h4>
         )}
+        {props.currentUserID === props.chairID && (
+          <button
+            className="add-activity"
+            onClick={() => setAddActivityIsOpen(true)}
+          >
+            Add activity
+          </button>
+        )}
       </div>
+      <hr />
       <div className="container">
         {props.activities.length !== 0 && activitylist}
       </div>
 
-      {props.currentUserID === props.chairID && (
-        <button onClick={() => setAddActivityIsOpen(true)}>Add activity</button>
-      )}
       <ModalAddActivity
         standup={props.standup}
         addActivityIsOpen={addActivityIsOpen}

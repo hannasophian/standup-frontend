@@ -55,6 +55,16 @@ export default function StandupCard(props: {
               </svg>
             </span>
           )}
+
+          {props.standup.meeting_link && (
+            // <span className="d-inline-block">
+            <div className="meeting-link">
+              <a href={props.standup.meeting_link}>
+                <button>Go to meeting</button>
+              </a>
+            </div>
+            // </span>
+          )}
         </div>
 
         <div className="card-body">
@@ -73,26 +83,18 @@ export default function StandupCard(props: {
             <p>Chair: {props.standup.chair_name}</p>
           </span>
 
-          {props.standup.meeting_link && (
-            <div className="meeting-link">
-              <p className="card-subheader">
-                Meeting Link:{" "}
-                <a href="props.standup.meeting_link">
-                  {props.standup.meeting_link}
-                </a>
-              </p>
-            </div>
-          )}
+          {activities &&
+            (activities.length !== 0 ||
+              props.standup.chair_id === props.currentUserID) && (
+              <ActivitiesDisplay
+                currentUserID={props.currentUserID}
+                chairID={props.standup.chair_id}
+                activities={activities}
+                standup={props.standup}
+                setActivities={setActivities}
+              />
+            )}
 
-          {activities && (
-            <ActivitiesDisplay
-              currentUserID={props.currentUserID}
-              chairID={props.standup.chair_id}
-              activities={activities}
-              standup={props.standup}
-              setActivities={setActivities}
-            />
-          )}
           <NotesDisplay
             setNextStandup={props.setNextStandup}
             setPreviousStandups={props.setPreviousStandups}

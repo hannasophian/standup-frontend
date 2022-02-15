@@ -21,7 +21,7 @@ export default function NavBar(props: PageProps): JSX.Element {
               <span className="d-inline-block">
                 <p>Hi, {props.currentUser.name}</p>
               </span>
-              <span className="d-inline-block btn float-right">
+              <span className="d-inline-block">
                 <img
                   className="nav-user-photo"
                   src={

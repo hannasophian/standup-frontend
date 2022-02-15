@@ -65,10 +65,33 @@ h3 {
 }
 .activity-section {
   background-color: white;
+  padding: 10px;
+  margin-bottom: 10px;
 }
 
 .single-activity {
   /* background-color: white; */
   margin: 5px;
   padding: 5px;
+}
+
+.activity-row {
+  display: flex;
+}
+
+/* .activity-link {
+  push: right;
+} */
+
+.edit-icon {
+  margin: 0 10px;
+  color: #fc4f4f;
+}
+
+.add-activity {
+  margin-left: auto;
+}
+
+.meeting-link {
+  margin-left: auto;
 }
