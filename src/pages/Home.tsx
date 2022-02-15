@@ -35,6 +35,7 @@ export default function Home(props: PageProps): JSX.Element {
     //   window.alert("Select a user to log in")
     // } else {
     const user = getUserByID(id);
+    localStorage.setItem("currentUser", JSON.stringify(user));
     // console.log(user)
     props.setCurrentUser(user);
     props.setTeam(user.team_id);
