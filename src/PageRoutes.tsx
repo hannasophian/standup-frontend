@@ -6,12 +6,28 @@ import { UserInterface } from "./utils/interfaces/UserInterface";
 import Home from "./pages/Home";
 
 export default function PageRoutes(): JSX.Element {
-  const [currentUser, setCurrentUser] = useState<UserInterface>({
-    id: 0,
-    name: "",
-    team_id: 0,
-    image_url: "",
+  // const [currentUser, setCurrentUser] = useState<UserInterface>({
+  //   id: 0,
+  //   name: "",
+  //   team_id: 0,
+  //   image_url: "",
+  // });
+
+  const [currentUser, setCurrentUser] = useState<UserInterface>(() => {
+    // getting stored value
+    const saved = localStorage.getItem("currentUser");
+
+    // const initialValue = JSON.parse(saved);
+    return saved
+      ? JSON.parse(saved)
+      : {
+          id: 0,
+          name: "",
+          team_id: 0,
+          image_url: "",
+        };
   });
+
   const [team, setTeam] = useState<number>(0);
 
   return (
