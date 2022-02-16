@@ -11,10 +11,7 @@ import "../css/dashboard.css";
 import "../css/standupcard.css";
 import { UserInterface } from "../utils/interfaces/UserInterface";
 import fetchTeamMembers from "../utils/fetch/fetchTeamMembers";
-import ModalNewStandup from "../components/ModalNewStandup";
-import fetchWheelURL from "../utils/fetch/fetchWheelURL";
-import FutureStandups from "../components/FutureStandups";
-import fetchFutureStandups from "../utils/fetch/fetchFutureStandups";
+import SideBar from "../components/SideBar";
 // import { Link } from "react-router-dom";
 
 export default function Dashboard(props: PageProps): JSX.Element {
@@ -25,7 +22,6 @@ export default function Dashboard(props: PageProps): JSX.Element {
   const [teamMembers, setTeamMembers] = useState<UserInterface[]>([]);
   const [seeMembers, setSeeMembers] = useState<boolean>(false);
   const [newStandupIsOpen, setNewStandupIsOpen] = useState<boolean>(false);
-  const [wheelURL, setWheelURL] = useState<string>("wheelofnames.com");
   const [futureStandups, setFutureStandups] = useState<StandupInterface[]>();
 
   useEffect(() => {
@@ -51,17 +47,6 @@ export default function Dashboard(props: PageProps): JSX.Element {
       }
     });
 
-    fetchWheelURL(props.team).then((res) => {
-      if (res) {
-        setWheelURL(res);
-      }
-    });
-
-    fetchFutureStandups(props.team).then((res) => {
-      if (res) {
-        setFutureStandups(res);
-      }
-    });
     // eslint-disable-next-line
   }, []);
 
@@ -146,41 +131,19 @@ export default function Dashboard(props: PageProps): JSX.Element {
               {previousStandups && previousCards}
             </div>
             <div className="right-col">
-              <div className="row">
-                <button
-                  onClick={() => setNewStandupIsOpen(true)}
-                  className="btn btn-primary"
-                >
-                  New Standup
-                </button>
-              </div>
-              <div className="row">
-                <a href={wheelURL}>
-                  <button>Wheel of Names</button>
-                </a>
-              </div>
-              {futureStandups && (
-                <FutureStandups
-                  team_id={props.team}
-                  standups={futureStandups}
-                  teamMembers={teamMembers}
-                  setFutureStandups={setFutureStandups}
-                  setNextStandup={setNextStandup}
-                  setPreviousStandups={setPreviousStandups}
-                />
-              )}
+              <SideBar
+                team={props.team}
+                teamMembers={teamMembers}
+                currentUser={props.currentUser}
+                setNextStandup={setNextStandup}
+                setFutureStandups={setFutureStandups}
+                futureStandups={futureStandups}
+                setPreviousStandups={setPreviousStandups}
+                nextStandup={nextStandup}
+                newStandupIsOpen={newStandupIsOpen}
+                setNewStandupIsOpen={setNewStandupIsOpen}
+              />
             </div>
-            <ModalNewStandup
-              setNextStandup={setNextStandup}
-              setPreviousStandups={setPreviousStandups}
-              newStandupIsOpen={newStandupIsOpen}
-              setNewStandupIsOpen={setNewStandupIsOpen}
-              teamMembers={teamMembers}
-              teamID={props.team}
-              currentUserID={props.currentUser.id}
-              nextStandup={nextStandup}
-              setFutureStandups={setFutureStandups}
-            />
           </div>
         </div>
       </div>
