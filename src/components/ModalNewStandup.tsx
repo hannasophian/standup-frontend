@@ -79,9 +79,7 @@ export default function ModalNewStandup(
       ariaHideApp={false}
     >
       <div className="modal-header">
-        <div className="content">
-          <h2>New StandUp</h2>
-        </div>
+        <h2>New StandUp</h2>
         <button
           type="button"
           className="close"
@@ -91,52 +89,66 @@ export default function ModalNewStandup(
         </button>
       </div>
       <div className="modal-body">
-        <section>
-          <h3>New Details</h3>
-          <label htmlFor="standup-time">Date and Time</label>
-          <input
-            type="datetime-local"
-            id="standup-time"
-            name=""
-            onChange={(e) => {
-              setInputDetails({ ...inputDetails, time: e.target.value });
-              // console.log(e.target.value);
-            }}
-            value={
-              inputDetails.time.includes("Z")
-                ? inputDetails.time.slice(0, inputDetails.time.length - 1)
-                : inputDetails.time
-            }
-            placeholder={inputDetails.time}
-          />
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="standup-time" className="me-2">
+              Date and Time
+            </label>
+            <input
+              type="datetime-local"
+              id="standup-time"
+              className="form-control"
+              name=""
+              onChange={(e) => {
+                setInputDetails({ ...inputDetails, time: e.target.value });
+                // console.log(e.target.value);
+              }}
+              value={
+                inputDetails.time.includes("Z")
+                  ? inputDetails.time.slice(0, inputDetails.time.length - 1)
+                  : inputDetails.time
+              }
+              placeholder={inputDetails.time}
+            />
+          </div>
           <br />
-          <label htmlFor="chair-select">Chair</label>
-          <select
-            className="user-dropdown"
-            name="chair-select"
-            id="chair-select"
-            value={inputDetails.chair_id}
-            onChange={(e) => {
-              setInputDetails({
-                ...inputDetails,
-                chair_id: parseInt(e.target.value),
-              });
-            }}
-          >
-            {usersList}
-          </select>
+          <div className="form-group">
+            <label htmlFor="chair-select" className="me-2">
+              Chair
+            </label>
+            <select
+              className="form-control"
+              name="chair-select"
+              id="chair-select"
+              value={inputDetails.chair_id}
+              onChange={(e) => {
+                setInputDetails({
+                  ...inputDetails,
+                  chair_id: parseInt(e.target.value),
+                });
+              }}
+            >
+              {usersList}
+            </select>
+          </div>
           <br />
-
-          <label htmlFor="meeting-link-input">Meeting Link (Optional)</label>
-          <input
-            id="meeting-link-input"
-            value={inputDetails.meeting_link ? inputDetails.meeting_link : ""}
-            onChange={(e) =>
-              setInputDetails({ ...inputDetails, meeting_link: e.target.value })
-            }
-          ></input>
-        </section>
-        <button onClick={handleSubmit}>OK</button>
+          <div className="form-group">
+            <label htmlFor="meeting-link-input">Meeting Link (Optional)</label>
+            <input
+              className="form-control"
+              id="meeting-link-input"
+              value={inputDetails.meeting_link ? inputDetails.meeting_link : ""}
+              onChange={(e) =>
+                setInputDetails({
+                  ...inputDetails,
+                  meeting_link: e.target.value,
+                })
+              }
+            ></input>
+          </div>
+          <br />
+          <button type="submit">OK</button>
+        </form>
       </div>
     </Modal>
   );
