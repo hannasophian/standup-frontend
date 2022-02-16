@@ -25,7 +25,7 @@ interface SideBarProps {
   setNewStandupIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function SideBar(props: SideBarProps) {
+export default function SideBar(props: SideBarProps): JSX.Element {
   const [wheelURL, setWheelURL] = useState<string>("wheelofnames.com");
 
   useEffect(() => {
@@ -40,6 +40,7 @@ export default function SideBar(props: SideBarProps) {
         props.setFutureStandups(res);
       }
     });
+    // eslint-disable-next-line
   }, []);
 
   return (
