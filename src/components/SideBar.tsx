@@ -53,11 +53,13 @@ export default function SideBar(props: SideBarProps): JSX.Element {
           New Standup
         </button>
       </div>
+      <hr />
       <div className="row">
         <a href={wheelURL}>
-          <button>Wheel of Names</button>
+          <button className="sidebar-button">Wheel of Names</button>
         </a>
       </div>
+      <hr />
       {props.futureStandups && (
         <FutureStandups
           team_id={props.team}
