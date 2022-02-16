@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import { UserInterface } from "./utils/interfaces/UserInterface";
@@ -27,6 +27,10 @@ export default function PageRoutes(): JSX.Element {
           image_url: "",
         };
   });
+
+  useEffect(() => {
+    setTeam(currentUser.team_id);
+  }, [currentUser]);
 
   const [team, setTeam] = useState<number>(0);
 
