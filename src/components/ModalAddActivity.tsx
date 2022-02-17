@@ -51,51 +51,64 @@ export default function ModalAddActivity(props: AddActivityProps): JSX.Element {
       ariaHideApp={false}
     >
       <div className="modal-header">
-        <div className="content">
+        <div className="row">
           <h2>Add Activity</h2>
           <p>{toStringDate(props.standup.time)}</p>
-          {/* <p>Chair: {props.standup.chair_name}</p> */}
         </div>
-        <button
-          type="button"
-          className="close"
-          onClick={() => props.setAddActivityIsOpen(false)}
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <div className="row">
+          <button
+            type="button"
+            className="close"
+            onClick={() => props.setAddActivityIsOpen(false)}
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
       </div>
+      {/* </div> */}
       <div className="modal-body">
-        <label htmlFor="name-input">Title*</label>
-        <input
-          id="name-input"
-          value={inputActivity.name ? inputActivity.name : ""}
-          onChange={(e) =>
-            setInputActivity({ ...inputActivity, name: e.target.value })
-          }
-        ></input>
-        <br />
-        <label htmlFor="url-input">URL</label>
-        <input
-          id="url-input"
-          placeholder="Optional"
-          value={inputActivity.url ? inputActivity.url : ""}
-          onChange={(e) =>
-            setInputActivity({ ...inputActivity, url: e.target.value })
-          }
-        ></input>
-        <br />
-        <label htmlFor="message-input">Comment</label>
-        <textarea
-          id="message-input"
-          rows={2}
-          placeholder="Optional: game passwords, instructions for the activity, short description"
-          value={inputActivity.comment ? inputActivity.comment : ""}
-          onChange={(e) =>
-            setInputActivity({ ...inputActivity, comment: e.target.value })
-          }
-        ></textarea>
-        <br />
-        <button onClick={handleSubmit}>OK</button>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="name-input">Title*</label>
+            <input
+              className="form-control"
+              id="name-input"
+              value={inputActivity.name ? inputActivity.name : ""}
+              onChange={(e) =>
+                setInputActivity({ ...inputActivity, name: e.target.value })
+              }
+            ></input>
+          </div>
+          <br />
+          <div className="form-group">
+            <label htmlFor="url-input">URL</label>
+            <input
+              id="url-input"
+              className="form-control"
+              placeholder="Optional"
+              value={inputActivity.url ? inputActivity.url : ""}
+              onChange={(e) =>
+                setInputActivity({ ...inputActivity, url: e.target.value })
+              }
+            ></input>
+          </div>
+          <br />
+          <div className="form-group">
+            <label htmlFor="message-input">Comment</label>
+            <textarea
+              id="message-input"
+              className="form-control"
+              rows={2}
+              placeholder="Optional: game passwords, instructions for the activity, short description"
+              value={inputActivity.comment ? inputActivity.comment : ""}
+              onChange={(e) =>
+                setInputActivity({ ...inputActivity, comment: e.target.value })
+              }
+            ></textarea>
+          </div>
+          <br />
+          <button type="submit">OK</button>
+        </form>
       </div>
     </Modal>
   );
