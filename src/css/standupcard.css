@@ -95,3 +95,13 @@ h3 {
 .meeting-link {
   margin-left: auto;
 }
+
+.new-details {
+  background-color: #ff9f45;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.new-details > h3 {
+  color: black;
+}
