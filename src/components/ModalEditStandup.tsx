@@ -83,9 +83,7 @@ export default function ModalEditStandup(props: EditStandupProps): JSX.Element {
       ariaHideApp={false}
     >
       <div className="modal-header">
-        <div className="content">
-          <h2>Edit StandUp</h2>
-        </div>
+        <h2>Edit StandUp</h2>
         <button
           type="button"
           className="close"
@@ -100,51 +98,67 @@ export default function ModalEditStandup(props: EditStandupProps): JSX.Element {
           <p>Date and Time: {toStringDate(props.standup.time)}</p>
           <p>Chair: {props.standup.chair_name}</p>
         </section>
-        <section>
+        <br />
+        <section className="new-details">
           <h3>New Details</h3>
-          <label htmlFor="standuptime">New Date and Time:</label>
-          <input
-            type="datetime-local"
-            id="standuptime"
-            name=""
-            onChange={(e) => {
-              setInputDetails({ ...inputDetails, time: e.target.value });
-              // console.log(e.target.value);
-            }}
-            value={
-              inputDetails.time.includes("Z")
-                ? inputDetails.time.slice(0, inputDetails.time.length - 1)
-                : inputDetails.time
-            }
-            // placeholder={inputDetails.time}
-          />
-          <br />
-          <label htmlFor="chair-select">Chair</label>
-          <select
-            className="user-dropdown"
-            name="chair-select"
-            id="chair-select"
-            value={inputDetails.chair_id}
-            onChange={(e) => {
-              setInputDetails({
-                ...inputDetails,
-                chair_id: parseInt(e.target.value),
-              });
-            }}
-          >
-            {usersList}
-          </select>
-          <br />
+          <form>
+            <div className="form-group">
+              <label htmlFor="standuptime">New Date and Time:</label>
+              <input
+                className="form-control"
+                type="datetime-local"
+                id="standuptime"
+                name=""
+                onChange={(e) => {
+                  setInputDetails({ ...inputDetails, time: e.target.value });
+                }}
+                value={
+                  inputDetails.time.includes("Z")
+                    ? inputDetails.time.slice(0, inputDetails.time.length - 1)
+                    : inputDetails.time
+                }
+              />
+            </div>
+            <br />
 
-          <label htmlFor="meeting-link-input">Meeting Link (Optional)</label>
-          <input
-            id="meeting-link-input"
-            value={inputDetails.meeting_link}
-            onChange={(e) =>
-              setInputDetails({ ...inputDetails, meeting_link: e.target.value })
-            }
-          ></input>
+            <div className="form-group">
+              <label htmlFor="chair-select">Chair</label>
+              <select
+                className="form-control"
+                name="chair-select"
+                id="chair-select"
+                value={inputDetails.chair_id}
+                onChange={(e) => {
+                  setInputDetails({
+                    ...inputDetails,
+                    chair_id: parseInt(e.target.value),
+                  });
+                }}
+              >
+                {usersList}
+              </select>
+            </div>
+            <br />
+
+            <div className="form-group">
+              <label htmlFor="meeting-link-input">
+                Meeting Link (Optional)
+              </label>
+              <input
+                id="meeting-link-input"
+                className="form-control"
+                value={inputDetails.meeting_link}
+                onChange={(e) =>
+                  setInputDetails({
+                    ...inputDetails,
+                    meeting_link: e.target.value,
+                  })
+                }
+              ></input>
+            </div>
+          </form>
         </section>
+        <br />
         <button onClick={handleSubmit}>OK</button>
       </div>
     </Modal>
