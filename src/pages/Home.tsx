@@ -117,7 +117,10 @@ export default function Home(): JSX.Element {
             />
             <br />
 
-            <div id="folder">
+            <label id="labelFileUpload" htmlFor="fileUpload">Upload .CSV file</label>
+            <input type="file" id="fileUpload" name="filename"></input>
+
+            {/* <div id="folder">
               <label id="labelFolderInput" htmlFor="folderInput">
                 Folder
               </label>
@@ -134,7 +137,7 @@ export default function Home(): JSX.Element {
                   }
                 />
               </fieldset>
-            </div>
+            </div> */}
 
             <div className="d-flex justify-content-end">
               <Link to="/dashboard">
